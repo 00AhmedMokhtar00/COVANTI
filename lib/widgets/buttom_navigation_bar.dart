@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 
-class CButtomNavigationBar extends StatelessWidget {
+class CButtomNavigationBar extends StatefulWidget {
   final Function onSelect;
   final int index;
   CButtomNavigationBar({this.onSelect, this.index});
 
+  @override
+  _CButtomNavigationBarState createState() => _CButtomNavigationBarState();
+}
+
+class _CButtomNavigationBarState extends State<CButtomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,27 +29,27 @@ class CButtomNavigationBar extends StatelessWidget {
         borderRadius: BorderRadius.circular(30),
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          onTap: (idx) {onSelect(idx);}, // new
-          currentIndex: index, // new
+          onTap: (idx) {widget.onSelect(idx);}, // new
+          currentIndex: widget.index, // new
           selectedItemColor: Colors.blue,
           selectedFontSize: 12,
           unselectedFontSize: 12,
           unselectedItemColor: Colors.grey,
           items: [
             const BottomNavigationBarItem(
-              icon: Icon(MdiIcons.homeOutline, ),
+              icon: Icon(Icons.home, ),
               title: Text('Home',),
             ),
             const BottomNavigationBarItem(
-              icon: Icon(MdiIcons.compassOutline,),
+              icon: Icon(Icons.location_on,),
               title: Text('Maps'),
             ),
             const BottomNavigationBarItem(
-              icon: Icon(MdiIcons.cartOutline,),
+              icon: Icon(Icons.shopping_cart,),
               title: Text('Shops'),
             ),
             const BottomNavigationBarItem(
-                icon: Icon(MdiIcons.textBoxMultipleOutline,),
+                icon: Icon(Icons.library_books,),
                 title: Text('News')
             )
           ],
@@ -53,3 +58,10 @@ class CButtomNavigationBar extends StatelessWidget {
     );
   }
 }
+
+/*
+* MdiIcons.homeOutline
+* MdiIcons.compassOutline
+* MdiIcons.cartOutline
+* MdiIcons.textBoxMultipleOutline
+* */

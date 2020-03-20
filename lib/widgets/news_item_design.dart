@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../models/news_item.dart';
 
 
@@ -28,17 +29,18 @@ class NewsItemDesign extends StatelessWidget {
                     width: constWidth * 0.94,
                     height: constWidth * 0.35,
                     decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
                       image: DecorationImage(
                         fit: BoxFit.fill,
-                        image: AssetImage(newsItem.img),
+                        image: NetworkImage(newsItem.img),
                       ),
                     ),
                   ),
                   const SizedBox(height: 6,),
-                  Text(newsItem.title, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
+                  Text(newsItem.title, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),textAlign: TextAlign.center,textDirection: TextDirection.rtl,),
                   const SizedBox(height: 6,),
-                  Text(newsItem.description, style: TextStyle(fontSize: 9)),
-                  const Center(child: FlatButton(child: Text('Read more',style: TextStyle(color: Colors.blue),),))
+                  Text(newsItem.description, style: TextStyle(fontSize: 9),textAlign: TextAlign.center,textDirection: TextDirection.rtl,),
+                  Center(child: FlatButton(shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),child: Text('Read more',style: TextStyle(color: Colors.blue),),onPressed: () =>_launchURL(newsItem.url),))
 
                 ],
               ),
@@ -46,5 +48,12 @@ class NewsItemDesign extends StatelessWidget {
           },
         )
     );
+  }
+}
+void _launchURL(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }

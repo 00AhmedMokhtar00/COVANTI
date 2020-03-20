@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'COVIDANTI',
+      title: 'COVANTI',
       theme: ThemeData(
         fontFamily: 'SFUIText',
         textTheme: TextTheme(

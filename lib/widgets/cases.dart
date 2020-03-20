@@ -23,6 +23,7 @@ class _CasesState extends State<Cases> {
     'recovered':000000
   };
   String covLastUpdate;
+
   @override
   void initState() {
     futureCase = fetchCase();
@@ -73,7 +74,6 @@ class _CasesState extends State<Cases> {
       };
       covLastUpdate = prefs.getString('covidlastupdate')??'Now';
     });
-
   }
 
 }
