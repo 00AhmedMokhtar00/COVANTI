@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import '../screens/protect_yourself.dart';
 
 class ProtectYourselfButton extends StatelessWidget {
+  const ProtectYourselfButton();
   @override
   Widget build(BuildContext context) {
-    final MQ = MediaQuery.of(context).size.height;
+    final MQ = MediaQuery.of(context).size;
     return InkWell(
       borderRadius: BorderRadius.circular(30),
       onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (_) => ProtectYourself()));},
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 10),
-        width: double.infinity,
-        height: MQ * 0.06,
+        width: MQ.width,
+        height: MQ.height * 0.06,
         decoration: BoxDecoration(
             color: Theme.of(context).primaryColor,
             borderRadius: BorderRadius.circular(15),

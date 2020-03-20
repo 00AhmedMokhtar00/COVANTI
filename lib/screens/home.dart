@@ -21,7 +21,7 @@ class Home extends StatelessWidget {
         Country('In Egypt'),
         Cases(),
         COVIDInfo(),
-        ProtectYourselfButton(),
+        const ProtectYourselfButton(),
         COVANTI(),
       ],
     );
