@@ -5,7 +5,7 @@ class CasesBuilder extends StatelessWidget {
   final int totalCases, deathCases, recoverCases;
   final String covLastUpdate;
 
-  const CasesBuilder(this.totalCases, this.deathCases, this.recoverCases, this.covLastUpdate);
+  CasesBuilder(this.totalCases, this.deathCases, this.recoverCases, this.covLastUpdate);
   @override
   Widget build(BuildContext context) {
     return Column(

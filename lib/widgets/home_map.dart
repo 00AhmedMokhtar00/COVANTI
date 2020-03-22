@@ -1,15 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
-class HomeMap extends StatefulWidget {
-  @override
-  _HomeMapState createState() => _HomeMapState();
-}
 
-class _HomeMapState extends State<HomeMap> {
-  Completer<WebViewController> _controller = Completer<WebViewController>();
+class HomeMap extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     final MQ = MediaQuery.of(context).size.height;
@@ -29,13 +22,3 @@ class _HomeMapState extends State<HomeMap> {
 }
 
 
-/*
-*child: WebView(
-        initialUrl: 'https://extranet.who.int/publicemergency',
-        javascriptMode: JavascriptMode.unrestricted,
-        onWebViewCreated: (WebViewController controller){
-          _controller.complete(controller);
-        },
-      )
-*
-          * */

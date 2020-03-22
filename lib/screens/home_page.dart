@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../screens/shops.dart';
 import '../widgets/buttom_navigation_bar.dart';
 import 'home.dart';
@@ -12,12 +13,19 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
-  final List<Widget> _screens = [
-    Home(),
-    CMap(),
-    Shops(),
-    News()
-  ];
+  List<Widget> _screens;
+
+  @override
+  void initState() {
+    _screens = [
+      Home(),
+      CMap(),
+      Shops(),
+      News()
+    ];
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +34,8 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
       body: Stack(
         children: <Widget>[
-          ListView(
-            children: <Widget>[
-              Container(width: double.infinity,margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 30),child: _screens[_currentIndex]),
-              Container(height: 100,width: double.infinity,)
-            ],
+          SingleChildScrollView(
+              child: Container(width: double.infinity,margin: const EdgeInsets.only(left: 10, right: 10, top: 30, bottom: 100),child: _screens[_currentIndex]),
           ),
           Align(
             alignment: Alignment.bottomCenter,
@@ -46,5 +51,7 @@ class _HomePageState extends State<HomePage> {
       _currentIndex = index;
     });
   }
+
+
 }
 

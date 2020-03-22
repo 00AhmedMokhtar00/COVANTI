@@ -1,14 +1,11 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../models/case.dart';
+import 'package:http/http.dart' as http;
 import 'cases_builder.dart';
-
-
 
 class Cases extends StatefulWidget {
   @override
@@ -16,31 +13,23 @@ class Cases extends StatefulWidget {
 }
 
 class _CasesState extends State<Cases> {
-  Future<Case> futureCase;
-  var offlineData = {
-    'cases':000000,
-    'deaths':000000,
-    'recovered':000000
-  };
   String covLastUpdate;
 
-  @override
-  void initState() {
-    futureCase = fetchCase();
-    super.initState();
-  }
+  bool connectionAvailable = true;
 
   @override
   Widget build(BuildContext context) {
-    getData();
-    return FutureBuilder<Case>(
-      future: futureCase,
+    return FutureBuilder<Map<String, int>>(
+      future: getData(),
       builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return CasesBuilder(snapshot.data.totalGlobalCases, snapshot.data.totalGlobalDeaths, snapshot.data.totalGlobalrecovered, covLastUpdate);
-        } else if (snapshot.hasError) {
-
-          return CasesBuilder(offlineData['cases'], offlineData['deaths'], offlineData['recovered'], covLastUpdate);
+        if(connectionAvailable || snapshot.data['cases'] != 0) {
+          if (snapshot.hasData || snapshot.hasError) {
+            return CasesBuilder(
+                snapshot.data['cases'] ?? 0, snapshot.data['deaths'] ?? 0,
+                snapshot.data['recovered'] ?? 0, covLastUpdate);
+          }
+        }else{
+          return Center(child: Text('Please enable internet connection to get the statistics',textAlign: TextAlign.center,style: TextStyle(color: Colors.red),));
         }
         // By default, show a loading spinner.
         return const Center(child: CircularProgressIndicator());
@@ -48,32 +37,31 @@ class _CasesState extends State<Cases> {
     );
   }
 
-  Future<Case> fetchCase() async {
-    final response = await http.get('https://coronavirus-19-api.herokuapp.com/countries/Egypt');
-    var body = json.decode(response.body);
-
-    if (response.statusCode == 200) {
+  Future<Map<String, int>> getData()async {
+    try {
+      await fetchCase();
+    }
+    catch (e) {connectionAvailable = false;}
+    finally {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setInt('cases', body['cases']);
-      prefs.setInt('deaths', body['deaths']);
-      prefs.setInt('recovered', body['recovered']);
-      prefs.setString('covidlastupdate', DateFormat.yMMMd().format(DateTime.now())+ ' '+DateFormat.Hm().format(DateTime.now()));
-      return Case.fromJson(json.decode(response.body));
-    } else {
-      throw Exception('Failed to load cases');
+      covLastUpdate = prefs.getString('covidlastupdate') ?? ' ';
+      return {
+        'cases': prefs.getInt('cases') ?? 0,
+        'deaths': prefs.getInt('deaths') ?? 0,
+        'recovered': prefs.getInt('recovered') ?? 0,
+      };
     }
   }
 
-   getData()async{
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      offlineData = {
-        'cases': prefs.getInt('cases'),
-        'deaths': prefs.getInt('deaths'),
-        'recovered': prefs.getInt('recovered'),
-      };
-      covLastUpdate = prefs.getString('covidlastupdate')??'Now';
-    });
+  Future<void> fetchCase() async {
+    final response = await http.get('https://coronavirus-19-api.herokuapp.com/countries/Egypt');
+    if (response.statusCode == 200) {
+      var body = json.decode(response.body);
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setInt('cases', body['cases'] ?? 0);
+      prefs.setInt('deaths', body['deaths'] ?? 0);
+      prefs.setInt('recovered', body['recovered'] ?? 0);
+      prefs.setString('covidlastupdate', DateFormat.yMMMd().format(DateTime.now()) + ' ' + DateFormat.Hm().format(DateTime.now()));
+    }
   }
-
 }

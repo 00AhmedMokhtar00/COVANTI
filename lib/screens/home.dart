@@ -10,6 +10,7 @@ import '../widgets/title.dart';
 
 
 class Home extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
 
@@ -26,6 +27,8 @@ class Home extends StatelessWidget {
       ],
     );
   }
+
+
 }
 
 
