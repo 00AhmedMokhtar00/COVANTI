@@ -32,8 +32,11 @@ dependencies:
   flutter_sim_country_code: ^0.0.3
   geolocator: ^5.3.0
   google_maps_flutter: ^0.5.25
+  json_serializable: ^2.0.2
 
 dev_dependencies:
+  pedantic: ^1.4.0
+  build_runner: ^1.2.7
   flutter_test:
     sdk: flutter
 
@@ -55,6 +58,7 @@ flutter:
    - assets/icons/
    - assets/images/advices/
    - assets/countries.json
+   - assets/countries_position.json
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

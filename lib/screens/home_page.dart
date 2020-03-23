@@ -7,8 +7,9 @@ import 'map.dart';
 import 'news.dart';
 
 class HomePage extends StatefulWidget {
-  String _country;
-  HomePage(this._country);
+  final String _country, _countryCode;
+  // ignore: sort_constructors_first
+  HomePage(this._country, this._countryCode);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -23,7 +24,7 @@ class _HomePageState extends State<HomePage> {
       Home(widget._country),
       CMap(widget._country),
       Shops(),
-      News()
+      News(widget._countryCode)
     ];
     super.initState();
   }

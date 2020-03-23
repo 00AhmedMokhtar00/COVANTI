@@ -1,13 +1,18 @@
 import 'dart:convert';
 
+import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sim_country_code/flutter_sim_country_code.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'screens/home_page.dart';
 
-main() => runApp(MyApp());
+main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIOverlays([]);
+  runApp(MyApp());
+}
 
 
 class MyApp extends StatelessWidget {
@@ -28,30 +33,30 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue
       ),
       home: FutureBuilder(
-        future: getData(context),
+        future: getAllData(context),
         builder: (context, snapshot) {
-          if(snapshot.hasData)
-            return HomePage(snapshot.data);
+          if(snapshot.hasData || snapshot.hasError) {
+            return HomePage(snapshot.data[0], snapshot.data[1]);
+          }
           return Container(color: Colors.white,width: double.infinity,height: MediaQuery.of(context).size.height,child: Center(child: CircularProgressIndicator()),);
         }
       )
     );
   }
 
-  getData(BuildContext context)async{
+  getAllData(BuildContext context)async{
+    final response = await http.get('https://coronavirus-tracker-api.herokuapp.com/v2/locations');
+    var body = json.decode(response.body);
     int idx;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<dynamic> data = json.decode(await DefaultAssetBundle.of(context).loadString('assets/countries.json'));
     var country = await FlutterSimCountryCode.simCountryCode;
-    for(int i = 0 ; i < data.length ; i++){
-      if(data[i]['code'] == country){
+    for(int i = 0; i < 486 ; i++){
+      print('Search');
+      if(body['locations'][i]['country_code'] == country){
+        print('Reached');
         idx = i;
-        prefs.setString('country', data[i]['name']);
-
-        return data[i]['name'];
+        return [body['locations'][idx]['country'],body['locations'][idx]['country_code'].toString().toLowerCase()];
       }
     }
-    return data[idx]['name'];
+    return [body['locations'][idx]['country'].toString(),body['locations'][idx]['country_code'].toString().toLowerCase()];
   }
-
 }

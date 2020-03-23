@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 
+import '../screens/global_active_map.dart';
+
 
 class GlobalMap extends StatelessWidget {
   GoogleMapController mapController;
@@ -9,7 +11,7 @@ class GlobalMap extends StatelessWidget {
   LatLng _center;
 
   Future<LatLng> getCurrentLocation()async{
-    Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
     _center = LatLng(position.latitude, position.longitude);
     return _center;
   }
@@ -29,6 +31,7 @@ class GlobalMap extends StatelessWidget {
             builder: (context, snapshot) {
               if(snapshot.hasData) {
                 return GoogleMap(
+                  onTap: (_){Navigator.of(context).push(MaterialPageRoute(builder: (_)=> GlobalActiveMap()));},
                   mapType: MapType.normal,
                   initialCameraPosition: CameraPosition(
                     target: _center,

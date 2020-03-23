@@ -11,7 +11,7 @@ import '../widgets/title.dart';
 
 class Home extends StatelessWidget {
 
-  String country;
+  final String country;
   Home(this.country);
 
 

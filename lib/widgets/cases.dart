@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 import 'cases_builder.dart';
 
 class Cases extends StatefulWidget {
-  String country;
+  final String country;
   Cases(this.country);
   @override
   _CasesState createState() => _CasesState();
@@ -57,13 +57,18 @@ class _CasesState extends State<Cases> {
 
   Future<void> fetchCase() async {
     final response = await http.get('https://coronavirus-19-api.herokuapp.com/countries/${widget.country}');
+    final responseUSA = await http.get('https://coronavirus-19-api.herokuapp.com/countries/USA');
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
+      var body2 = json.decode(responseUSA.body);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setInt('cases', body['cases'] ?? 0);
       prefs.setInt('deaths', body['deaths'] ?? 0);
       prefs.setInt('recovered', body['recovered'] ?? 0);
       prefs.setString('covidlastupdate', DateFormat.yMMMd().format(DateTime.now()) + ' ' + DateFormat.Hm().format(DateTime.now()));
+      prefs.setInt('casesUSA', body2['cases'] ?? 0);
+      prefs.setInt('deathsUSA', body2['deaths'] ?? 0);
+      prefs.setInt('recoveredUSA', body2['recovered'] ?? 0);
     }
   }
 }

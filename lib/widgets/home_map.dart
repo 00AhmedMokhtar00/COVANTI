@@ -11,8 +11,8 @@ class HomeMap extends StatelessWidget {
     mapController = controller;
   }
   Future<LatLng> getCurrentLocation()async{
-    Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    _center = LatLng(position.latitude - 2, position.longitude);
+    Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+    _center = LatLng(position.latitude, position.longitude);
     return _center;
   }
 
@@ -30,14 +30,17 @@ class HomeMap extends StatelessWidget {
         future: getCurrentLocation(),
         builder: (context, snapshot) {
           if(snapshot.hasData) {
-            return GoogleMap(
-              mapType: MapType.normal,
-              onMapCreated: _onMapCreated,
-              initialCameraPosition: CameraPosition(
-                target: _center,
-                zoom: 4.5,
+            return GestureDetector(
+              onTap: null,
+              child: GoogleMap(
+                mapType: MapType.normal,
+                onMapCreated: _onMapCreated,
+                initialCameraPosition: CameraPosition(
+                  target: _center,
+                  zoom: 4.0,
+                ),
+                markers: _createMarker(_center),
               ),
-              markers: _createMarker(_center),
             );
           }
           return Center(child: CircularProgressIndicator());

@@ -18,7 +18,7 @@ class _ShopsState extends State<Shops> with TickerProviderStateMixin{
   @override
   void initState() {
     super.initState();
-    _tabController = new TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
   }
 
 

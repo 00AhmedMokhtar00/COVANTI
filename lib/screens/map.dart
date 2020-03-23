@@ -9,7 +9,7 @@ import '../widgets/title.dart';
 
 class CMap extends StatelessWidget{
 
-  String country;
+  final String country;
   CMap(this.country);
 
   @override

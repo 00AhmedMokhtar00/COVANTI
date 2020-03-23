@@ -10,10 +10,10 @@ import '../widgets/title.dart';
 
 
 class News extends StatelessWidget {
-
+  final String countryCode;
   Future<Map<String, String>> offlineData;
 
-  News(){offlineData = getData();}
+  News(this.countryCode){offlineData = getData();}
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,7 @@ class News extends StatelessWidget {
   }
 
   Future<NewsItem> fetchNews() async {
-    final response = await http.get('http://newsapi.org/v2/top-headlines?country=eg&category=health&apiKey=323019aaa9fd463e83cce512b425a1ab');
+    final response = await http.get('http://newsapi.org/v2/top-headlines?country=$countryCode&category=health&apiKey=323019aaa9fd463e83cce512b425a1ab');
     var body = json.decode(response.body);
 
     if (response.statusCode == 200) {
