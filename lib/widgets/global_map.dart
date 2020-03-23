@@ -3,16 +3,14 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 
 
-class HomeMap extends StatelessWidget {
+class GlobalMap extends StatelessWidget {
   GoogleMapController mapController;
   Position position;
   LatLng _center;
-  void _onMapCreated(GoogleMapController controller) async{
-    mapController = controller;
-  }
+
   Future<LatLng> getCurrentLocation()async{
     Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    _center = LatLng(position.latitude - 2, position.longitude);
+    _center = LatLng(position.latitude, position.longitude);
     return _center;
   }
 
@@ -21,28 +19,26 @@ class HomeMap extends StatelessWidget {
     final MQ = MediaQuery.of(context).size.height;
     return Container(
       //margin: EdgeInsets.symmetric(horizontal: 10),
-      width: double.infinity,
-      height: MQ * 0.26,
-      decoration: BoxDecoration(
+        width: double.infinity,
+        height: MQ * 0.26,
+        decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-      ),
-      child: FutureBuilder(
-        future: getCurrentLocation(),
-        builder: (context, snapshot) {
-          if(snapshot.hasData) {
-            return GoogleMap(
-              mapType: MapType.normal,
-              onMapCreated: _onMapCreated,
-              initialCameraPosition: CameraPosition(
-                target: _center,
-                zoom: 4.5,
-              ),
-              markers: _createMarker(_center),
-            );
-          }
-          return Center(child: CircularProgressIndicator());
-        }
-      )
+        ),
+        child: FutureBuilder(
+            future: getCurrentLocation(),
+            builder: (context, snapshot) {
+              if(snapshot.hasData) {
+                return GoogleMap(
+                  mapType: MapType.normal,
+                  initialCameraPosition: CameraPosition(
+                    target: _center,
+                    zoom: 0,
+                  ),
+                );
+              }
+              return Center(child: CircularProgressIndicator());
+            }
+        )
     );
   }
 }
