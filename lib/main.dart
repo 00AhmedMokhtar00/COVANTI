@@ -1,4 +1,9 @@
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_sim_country_code/flutter_sim_country_code.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'screens/home_page.dart';
 
@@ -6,6 +11,8 @@ main() => runApp(MyApp());
 
 
 class MyApp extends StatelessWidget {
+
+  MyApp(){}
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +29,31 @@ class MyApp extends StatelessWidget {
         ),
         primarySwatch: Colors.blue
       ),
-      home: HomePage()
+      home: FutureBuilder(
+        future: getData(context),
+        builder: (context, snapshot) {
+          if(snapshot.hasData)
+            return HomePage(snapshot.data);
+          return Container(color: Colors.white,width: double.infinity,height: MediaQuery.of(context).size.height,child: Center(child: CircularProgressIndicator()),);
+        }
+      )
     );
   }
 
+  getData(BuildContext context)async{
+    int idx;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<dynamic> data = json.decode(await DefaultAssetBundle.of(context).loadString('assets/countries.json'));
+    var country = await FlutterSimCountryCode.simCountryCode;
+    for(int i = 0 ; i < data.length ; i++){
+      if(data[i]['code'] == country){
+        idx = i;
+        prefs.setString('country', data[i]['name']);
+
+        return data[i]['name'];
+      }
+    }
+    return data[idx]['name'];
+  }
 
 }

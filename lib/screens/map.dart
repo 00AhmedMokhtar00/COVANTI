@@ -9,24 +9,23 @@ import '../widgets/title.dart';
 
 class CMap extends StatelessWidget{
 
+  String country;
+  CMap(this.country);
+
   @override
   Widget build(BuildContext context) {
-    final MQ = MediaQuery.of(context).size.height;
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        CTitle('Map'),
-        HomeMap(),
-        Country('Globally'),
-        GlobalCases(),
-        Country('In Egypt'),
-        Cases(),
-      ],
-    );
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            CTitle('Map'),
+            HomeMap(),
+            Country('Globally'),
+            GlobalCases(),
+            Country('In $country'),
+            Cases(country),
+          ],
+        );
   }
-
-
-
 }
 
 

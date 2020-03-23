@@ -11,23 +11,26 @@ import '../widgets/title.dart';
 
 class Home extends StatelessWidget {
 
+  String country;
+  Home(this.country);
+
+
   @override
   Widget build(BuildContext context) {
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        CTitle('Home'),
-        HomeMap(),
-        Country('In Egypt'),
-        Cases(),
-        COVIDInfo(),
-        const ProtectYourselfButton(),
-        COVANTI(),
-      ],
-    );
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            CTitle('Home'),
+            HomeMap(),
+            Country('In $country'),
+            Cases(country),
+            COVIDInfo(),
+            const ProtectYourselfButton(),
+            COVANTI(),
+          ],
+        );
   }
-
 
 }
 

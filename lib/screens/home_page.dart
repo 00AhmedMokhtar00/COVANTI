@@ -7,6 +7,8 @@ import 'map.dart';
 import 'news.dart';
 
 class HomePage extends StatefulWidget {
+  String _country;
+  HomePage(this._country);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -18,8 +20,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _screens = [
-      Home(),
-      CMap(),
+      Home(widget._country),
+      CMap(widget._country),
       Shops(),
       News()
     ];
