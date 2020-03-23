@@ -12,8 +12,6 @@ main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
 
-  MyApp(){}
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
