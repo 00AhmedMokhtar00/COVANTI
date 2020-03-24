@@ -50,7 +50,7 @@ class GlobalCases extends StatelessWidget {
   }
 
   Future<void> fetchGlobalCase() async {
-    final response = await http.get('https://coronavirus-19-api.herokuapp.com/all');
+    final response = await http.get('https://corona.lmao.ninja/all');
     var body = json.decode(response.body);
     if (response.statusCode == 200) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
