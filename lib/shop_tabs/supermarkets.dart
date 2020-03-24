@@ -12,12 +12,12 @@ class SuperMarkets extends StatelessWidget {
       height: MQ,
       child: ListView.builder(
         itemBuilder: (_, index) {
-          if(shopItem[index].type == 'S')
+          if(shopItem.isNotEmpty && shopItem[index].type == 'S')
             return ShopItemDesign(shopItem: shopItem[index]);
           else
-            return Container();
+            return Center(child: Text('SOON!',style: TextStyle(color: Colors.red.withOpacity(0.7),fontSize: 25),),);
         },
-        itemCount: shopItem.length??0,
+        itemCount: shopItem.length == 0? 1: shopItem.length,
       ),
     );
   }

@@ -47,7 +47,7 @@ class Locations {
     this.countries,
   });
 
-  factory Locations.fromJson(Map<String, dynamic> json) =>
+  factory Locations.fromJson(List<dynamic> json) =>
       _$LocationsFromJson(json);
   Map<String, dynamic> toJson() => _$LocationsToJson(this);
 
@@ -55,7 +55,7 @@ class Locations {
 }
 
 Future<Locations> getAllCountries() async {
-  const LocationsURL = 'https://coronavirus-tracker-api.herokuapp.com/v2/locations';
+  const LocationsURL = 'https://corona.lmao.ninja/countries';
 
   // Retrieve the locations of Google offices
   final response = await http.get(LocationsURL);

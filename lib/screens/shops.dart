@@ -35,7 +35,6 @@ class _ShopsState extends State<Shops> with TickerProviderStateMixin{
         labelColor: Colors.white,
         unselectedLabelColor: Colors.blue,
         indicatorColor: Colors.transparent,
-
         onTap: (idx) {
           setState(() {
             _tabController.index = idx;

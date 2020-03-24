@@ -14,7 +14,7 @@ class CTab extends StatelessWidget {
         color: color,
         //color: Colors.blue,
         borderRadius: BorderRadius.circular(15),
-        boxShadow: [BoxShadow(color: Colors.grey, spreadRadius: 0.5)]
+        boxShadow: [BoxShadow(color: Colors.grey, spreadRadius: 0.2, blurRadius: 2)]
       ),
       child: Center(child: FittedBox(child: Text(title))),
     );

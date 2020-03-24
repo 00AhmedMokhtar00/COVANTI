@@ -1,6 +1,7 @@
 import '../models/shop_item.dart';
 
 const List<ShopItem> shopItem = [
+  /*
   ShopItem(
     id: 1,
     type: 'P',
@@ -27,4 +28,6 @@ const List<ShopItem> shopItem = [
     name: 'اليزيد',
     description: 'متجر متكامل لجميع الادوات المنزلية ومستلزمات المطبخ والمواد الغذائية',
   ),
+
+   */
 ];

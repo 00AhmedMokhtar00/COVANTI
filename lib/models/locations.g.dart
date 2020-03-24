@@ -19,12 +19,12 @@ Map<String, dynamic> _$LatLngToJson(LatLng instance) =>
 
 AllCountries _$OfficeFromJson(Map<String, dynamic> json) {
   return AllCountries(
-      lat: double.parse(json['coordinates']['latitude'] as String),
-      lng: double.parse(json['coordinates']['longitude'] as String),
+      lat: double.parse(json['countryInfo']['lat'].toString()),
+      lng: double.parse(json['countryInfo']['long'].toString()),
       name: json['country'] as String,
-      cases: (json['latest']['confirmed'] as num).toString(),
-      deaths: (json['latest']['deaths'] as num).toString(),
-      recovered: (json['latest']['recovered'] as num).toString()
+      cases: (json['cases'] as num).toString(),
+      deaths: (json['deaths'] as num).toString(),
+      recovered: (json['recovered'] as num).toString()
   );
 }
 
@@ -37,9 +37,9 @@ Map<String, dynamic> _$OfficeToJson(AllCountries instance) => <String, dynamic>{
       'recovered': instance.recovered
     };
 
-Locations _$LocationsFromJson(Map<String, dynamic> json) {
+Locations _$LocationsFromJson(List<dynamic> json) {
   return Locations(
-      countries: (json['locations'] as List)
+      countries: (json as List)
           ?.map((e) =>
               e == null ? null : AllCountries.fromJson(e as Map<String, dynamic>))
           ?.toList(),

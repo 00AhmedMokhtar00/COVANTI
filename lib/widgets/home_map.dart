@@ -3,21 +3,14 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 
 
-class HomeMap extends StatefulWidget {
-  @override
-  _HomeMapState createState() => _HomeMapState();
-}
+class HomeMap extends StatelessWidget {
 
-class _HomeMapState extends State<HomeMap> {
   GoogleMapController mapController;
   Position position;
   Future _center;
 
-  @override
-  void initState() {
-    _center = getCurrentLocation();
-    super.initState();
-  }
+  HomeMap(){_center = getCurrentLocation();}
+
   void _onMapCreated(GoogleMapController controller) async{
     mapController = controller;
   }

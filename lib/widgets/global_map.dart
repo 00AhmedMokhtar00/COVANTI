@@ -8,12 +8,14 @@ import '../screens/global_active_map.dart';
 class GlobalMap extends StatelessWidget {
   GoogleMapController mapController;
   Position position;
-  LatLng _center;
+  Future _center;
+
+  GlobalMap(){_center = getCurrentLocation();}
 
   Future<LatLng> getCurrentLocation()async{
     Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
-    _center = LatLng(position.latitude, position.longitude);
-    return _center;
+    final cur = LatLng(position.latitude, position.longitude);
+    return cur;
   }
 
   @override
@@ -27,14 +29,15 @@ class GlobalMap extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         child: FutureBuilder(
-            future: getCurrentLocation(),
+            future: _center,
             builder: (context, snapshot) {
               if(snapshot.hasData) {
                 return GoogleMap(
+                  zoomGesturesEnabled: true,
                   onTap: (_){Navigator.of(context).push(MaterialPageRoute(builder: (_)=> GlobalActiveMap()));},
                   mapType: MapType.normal,
                   initialCameraPosition: CameraPosition(
-                    target: _center,
+                    target: snapshot.data,
                     zoom: 0,
                   ),
                 );
@@ -46,15 +49,6 @@ class GlobalMap extends StatelessWidget {
   }
 }
 
-Set<Marker> _createMarker(LatLng pos) {
-  return <Marker>[
-    Marker(
-      markerId: MarkerId("marker_1"),
-      position: pos,
-      icon: BitmapDescriptor.defaultMarker,
-    ),
-  ].toSet();
-}
 /*
 *
 * image: DecorationImage(
