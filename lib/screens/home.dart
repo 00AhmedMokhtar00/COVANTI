@@ -14,7 +14,6 @@ class Home extends StatelessWidget {
   final String country;
   Home(this.country);
 
-
   @override
   Widget build(BuildContext context) {
 

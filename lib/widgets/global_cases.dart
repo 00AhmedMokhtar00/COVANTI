@@ -7,13 +7,26 @@ import 'package:http/http.dart' as http;
 
 import 'cases_builder.dart';
 
-class GlobalCases extends StatelessWidget {
+class GlobalCases extends StatefulWidget {
+  @override
+  _GlobalCasesState createState() => _GlobalCasesState();
+}
+
+class _GlobalCasesState extends State<GlobalCases> {
   String covLastUpdate;
   bool connectionAvailable = true;
+  Future offlineData;
+
+  @override
+  void initState() {
+    offlineData = getData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Map<String, int>>(
-      future: getData(),
+      future: offlineData,
       builder: (context, snapshot) {
         if(connectionAvailable || snapshot.data['cases'] != 0) {
           if (snapshot.hasData || snapshot.hasError) {
@@ -59,5 +72,4 @@ class GlobalCases extends StatelessWidget {
       throw Exception('Failed to load cases');
     }
   }
-
 }

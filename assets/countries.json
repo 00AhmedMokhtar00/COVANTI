@@ -108,7 +108,7 @@
     "code": "BO"
   },
   {
-    "name": "Bosnia and Herzegovina",
+    "name": "Bosnia",
     "code": "BA"
   },
   {
@@ -204,7 +204,7 @@
     "code": "CD"
   },
   {
-    "name": "Cook Islands",
+    "name": "Cook",
     "code": "CK"
   },
   {
@@ -420,7 +420,7 @@
     "code": "IE"
   },
   {
-    "name": "Isle of Man",
+    "name": "Isle",
     "code": "IM"
   },
   {
@@ -760,7 +760,7 @@
     "code": "ST"
   },
   {
-    "name": "Saudi Arabia",
+    "name": "Saudi",
     "code": "SA"
   },
   {
@@ -776,7 +776,7 @@
     "code": "SC"
   },
   {
-    "name": "Sierra Leone",
+    "name": "Sierra",
     "code": "SL"
   },
   {
@@ -792,7 +792,7 @@
     "code": "SI"
   },
   {
-    "name": "Solomon Islands",
+    "name": "Solomon",
     "code": "SB"
   },
   {
@@ -800,7 +800,7 @@
     "code": "SO"
   },
   {
-    "name": "South Africa",
+    "name": "South",
     "code": "ZA"
   },
   {
@@ -812,7 +812,7 @@
     "code": "ES"
   },
   {
-    "name": "Sri Lanka",
+    "name": "Sri",
     "code": "LK"
   },
   {
@@ -824,7 +824,7 @@
     "code": "SR"
   },
   {
-    "name": "Svalbard and Jan Mayen",
+    "name": "Svalbard",
     "code": "SJ"
   },
   {
@@ -840,11 +840,11 @@
     "code": "CH"
   },
   {
-    "name": "Syrian Arab Republic",
+    "name": "Syria",
     "code": "SY"
   },
   {
-    "name": "Taiwan, Province of China",
+    "name": "Taiwan",
     "code": "TW"
   },
   {
@@ -852,7 +852,7 @@
     "code": "TJ"
   },
   {
-    "name": "Tanzania, United Republic of",
+    "name": "Tanzania",
     "code": "TZ"
   },
   {
@@ -908,15 +908,15 @@
     "code": "UA"
   },
   {
-    "name": "United Arab Emirates",
+    "name": "UAE",
     "code": "AE"
   },
   {
-    "name": "United Kingdom",
+    "name": "UK",
     "code": "GB"
   },
   {
-    "name": "United States",
+    "name": "USA",
     "code": "US"
   },
   {

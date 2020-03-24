@@ -58,7 +58,6 @@ flutter:
    - assets/icons/
    - assets/images/advices/
    - assets/countries.json
-   - assets/countries_position.json
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

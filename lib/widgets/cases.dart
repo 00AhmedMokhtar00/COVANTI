@@ -16,13 +16,20 @@ class Cases extends StatefulWidget {
 
 class _CasesState extends State<Cases> {
   String covLastUpdate;
-
   bool connectionAvailable = true;
+  Future offlineData;
+
+  @override
+  void initState() {
+    offlineData = getData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+
     return FutureBuilder<Map<String, int>>(
-      future: getData(),
+      future: offlineData,
       builder: (context, snapshot) {
         if(connectionAvailable || snapshot.data['cases'] != 0) {
           if (snapshot.hasData || snapshot.hasError) {
@@ -57,18 +64,14 @@ class _CasesState extends State<Cases> {
 
   Future<void> fetchCase() async {
     final response = await http.get('https://coronavirus-19-api.herokuapp.com/countries/${widget.country}');
-    final responseUSA = await http.get('https://coronavirus-19-api.herokuapp.com/countries/USA');
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
-      var body2 = json.decode(responseUSA.body);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setInt('cases', body['cases'] ?? 0);
       prefs.setInt('deaths', body['deaths'] ?? 0);
       prefs.setInt('recovered', body['recovered'] ?? 0);
       prefs.setString('covidlastupdate', DateFormat.yMMMd().format(DateTime.now()) + ' ' + DateFormat.Hm().format(DateTime.now()));
-      prefs.setInt('casesUSA', body2['cases'] ?? 0);
-      prefs.setInt('deathsUSA', body2['deaths'] ?? 0);
-      prefs.setInt('recoveredUSA', body2['recovered'] ?? 0);
     }
+    else{print('ERROR!!');}
   }
 }

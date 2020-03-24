@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sim_country_code/flutter_sim_country_code.dart';
@@ -15,8 +14,20 @@ main() {
 }
 
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
 
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Future locationData;
+
+  @override
+  void initState() {
+    locationData = getAllData();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,7 +44,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue
       ),
       home: FutureBuilder(
-        future: getAllData(context),
+        future: locationData,
         builder: (context, snapshot) {
           if(snapshot.hasData || snapshot.hasError) {
             return HomePage(snapshot.data[0], snapshot.data[1]);
@@ -44,19 +55,23 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  getAllData(BuildContext context)async{
-    final response = await http.get('https://coronavirus-tracker-api.herokuapp.com/v2/locations');
-    var body = json.decode(response.body);
+  getAllData()async{
+    final String country = await FlutterSimCountryCode.simCountryCode;
+    final String jsonString = await _loadAsset();
+    final body = json.decode(jsonString);
     int idx;
-    var country = await FlutterSimCountryCode.simCountryCode;
-    for(int i = 0; i < 486 ; i++){
-      print('Search');
-      if(body['locations'][i]['country_code'] == country){
-        print('Reached');
+
+    for(int i = 0; i < body.length; i++){
+
+      if(body[i]['code'] == country){
         idx = i;
-        return [body['locations'][idx]['country'],body['locations'][idx]['country_code'].toString().toLowerCase()];
+        return [body[idx]['name'],body[idx]['code'].toString().toLowerCase()];
       }
     }
-    return [body['locations'][idx]['country'].toString(),body['locations'][idx]['country_code'].toString().toLowerCase()];
+    return [body[idx]['name'].toString(),body[idx]['code'].toString().toLowerCase()];
+  }
+
+  Future<String> _loadAsset() async {
+    return await rootBundle.loadString('assets/countries.json');
   }
 }
