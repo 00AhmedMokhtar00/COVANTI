@@ -36,7 +36,7 @@ class News extends StatelessWidget {
 
         itemBuilder: (_, i){
           return FutureBuilder<Map<String, String>>(
-            future: getData(),
+            future: offlineData,
             builder: (context, snapshot) {
 
               if (snapshot.hasData) {

@@ -27,7 +27,8 @@ class COVANTI extends StatelessWidget {
                   style: TextStyle(color: Colors.blue, fontSize: 9,fontWeight: FontWeight.bold),)),
               ),
               Container(
-                margin: EdgeInsets.all(8),
+                margin: const EdgeInsets.all(8),
+                decoration: BoxDecoration(boxShadow: [BoxShadow(color: Colors.grey,spreadRadius: 1.4, blurRadius: 2)],shape: BoxShape.circle),
                 child: CircleAvatar(
                   radius: constrain.maxWidth *0.1,
                   child: Container(
@@ -35,6 +36,7 @@ class COVANTI extends StatelessWidget {
                     width: constrain.maxWidth *0.125,
                     height: constrain.maxWidth *0.125,
                     decoration: BoxDecoration(
+
                       image: DecorationImage(
                         fit: BoxFit.fill,
                         image: AssetImage("assets/images/doc.png"),

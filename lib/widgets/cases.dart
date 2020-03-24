@@ -7,23 +7,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'cases_builder.dart';
 
-class Cases extends StatefulWidget {
+class Cases extends StatelessWidget {
   final String country;
-  Cases(this.country);
-  @override
-  _CasesState createState() => _CasesState();
-}
-
-class _CasesState extends State<Cases> {
   String covLastUpdate;
   bool connectionAvailable = true;
   Future offlineData;
 
-  @override
-  void initState() {
-    offlineData = getData();
-    super.initState();
-  }
+  Cases(this.country){offlineData = getData();}
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +53,7 @@ class _CasesState extends State<Cases> {
   }
 
   Future<void> fetchCase() async {
-    final response = await http.get('https://coronavirus-19-api.herokuapp.com/countries/${widget.country}');
+    final response = await http.get('https://coronavirus-19-api.herokuapp.com/countries/${country}');
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
       SharedPreferences prefs = await SharedPreferences.getInstance();

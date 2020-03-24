@@ -7,21 +7,12 @@ import 'package:http/http.dart' as http;
 
 import 'cases_builder.dart';
 
-class GlobalCases extends StatefulWidget {
-  @override
-  _GlobalCasesState createState() => _GlobalCasesState();
-}
-
-class _GlobalCasesState extends State<GlobalCases> {
+class GlobalCases extends StatelessWidget {
   String covLastUpdate;
   bool connectionAvailable = true;
   Future offlineData;
 
-  @override
-  void initState() {
-    offlineData = getData();
-    super.initState();
-  }
+  GlobalCases(){offlineData = getData();}
 
   @override
   Widget build(BuildContext context) {
