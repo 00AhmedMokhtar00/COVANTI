@@ -4,9 +4,9 @@ import 'screens/home.dart';
 
 void main() => runApp(Autism());
 
-class Autism extends StatelessWidget {
+class Autism extends StatelessWidget{
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Directionality(
       textDirection: TextDirection.rtl,
       child: MaterialApp(
