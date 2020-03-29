@@ -4,11 +4,27 @@ import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sim_country_code/flutter_sim_country_code.dart';
+import 'package:location/location.dart';
 
 import 'screens/home_page.dart';
 
-main() {
+fetchCurrentLocation() async {
+  var location = Location();
+  location.changeSettings(accuracy: LocationAccuracy.high);
+  if (await location.hasPermission() != true) {
+    await location.requestPermission();
+  }
+  try {
+    await location.onLocationChanged.listen((LocationData currentLocation) {
+    });
+  } on PlatformException {
+    location = null;
+  }
+}
+
+main(){
   WidgetsFlutterBinding.ensureInitialized();
+  fetchCurrentLocation();
   SystemChrome.setEnabledSystemUIOverlays([]);
   runApp(MyApp());
 }
@@ -30,6 +46,10 @@ class _MyAppState extends State<MyApp> {
   }
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'COVANTI',
@@ -49,7 +69,7 @@ class _MyAppState extends State<MyApp> {
           if(snapshot.hasData || snapshot.hasError) {
             return HomePage(snapshot.data[0], snapshot.data[1]);
           }
-          return Container(color: Colors.white,width: double.infinity,height: MediaQuery.of(context).size.height,child: Center(child: CircularProgressIndicator()),);
+          return SafeArea(child: Container(color: Colors.white,width: double.infinity,height: MediaQuery.of(context).size.height,child: Center(child: CircularProgressIndicator()),));
         }
       )
     );

@@ -30,7 +30,7 @@ class News extends StatelessWidget {
   Widget newsBuilder(MQ){
     return Container(
       width: double.infinity,
-      height: MQ * 0.9,
+      height: MQ * 0.88,
       child: ListView.builder(
         physics: const BouncingScrollPhysics(),
 
@@ -39,6 +39,9 @@ class News extends StatelessWidget {
             future: offlineData,
             builder: (context, snapshot) {
 
+              if(i == 19){
+                return SizedBox(height: 80,);
+              }
               if (snapshot.hasData) {
                 return NewsItemDesign(newsItem: NewsItem(title: snapshot.data['newsTitle$i'], description: snapshot.data['newsDescription$i'], url: snapshot.data['newsUrl$i'], img: snapshot.data['newsImg$i']),);
               }
@@ -47,7 +50,7 @@ class News extends StatelessWidget {
             },
           );
         },
-        itemCount: 19,
+        itemCount: 20,
       ),
     );
   }

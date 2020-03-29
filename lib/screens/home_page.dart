@@ -32,13 +32,14 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
+    final MQH = MediaQuery.of(context).size.height;
+    final MQW = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
         children: <Widget>[
           SingleChildScrollView(
-              child: Container(width: double.infinity,margin: const EdgeInsets.only(left: 10, right: 10, top: 30, bottom: 100),child: _screens[_currentIndex]),
+              child: Container(height: MQH,width: MQW,margin: const EdgeInsets.only(left: 10, right: 10, top: 30, bottom: 60),child: _screens[_currentIndex]),
           ),
           Align(
             alignment: Alignment.bottomCenter,

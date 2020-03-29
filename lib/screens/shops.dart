@@ -48,7 +48,7 @@ class _ShopsState extends State<Shops> with TickerProviderStateMixin{
       ),
       Container(
         width: double.infinity,
-        height: MediaQuery.of(context).size.height,
+        height: MediaQuery.of(context).size.height * 0.8,
         child: TabBarView(
           physics: NeverScrollableScrollPhysics(),
           controller: _tabController,
