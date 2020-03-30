@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sim_country_code/flutter_sim_country_code.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
 import 'screens/home_page.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Future locationData;
-
+  LatLng cur;
   @override
   void initState() {
     locationData = getAllData();
@@ -67,7 +68,7 @@ class _MyAppState extends State<MyApp> {
         future: locationData,
         builder: (context, snapshot) {
           if(snapshot.hasData || snapshot.hasError) {
-            return HomePage(snapshot.data[0], snapshot.data[1]);
+            return SafeArea(child: HomePage(snapshot.data[0], snapshot.data[1], cur));
           }
           return SafeArea(child: Container(color: Colors.white,width: double.infinity,height: MediaQuery.of(context).size.height,child: Center(child: CircularProgressIndicator()),));
         }
@@ -78,6 +79,7 @@ class _MyAppState extends State<MyApp> {
   getAllData()async{
     final String country = await FlutterSimCountryCode.simCountryCode;
     final String jsonString = await _loadAsset();
+    cur = await getCurrentLocation();
     final body = json.decode(jsonString);
     int idx;
 
@@ -93,5 +95,11 @@ class _MyAppState extends State<MyApp> {
 
   Future<String> _loadAsset() async {
     return await rootBundle.loadString('assets/countries.json');
+  }
+  Future<LatLng> getCurrentLocation()async{
+    var location = Location();
+    LocationData position = await location.getLocation();
+    final cur = LatLng(position.latitude, position.longitude);
+    return cur;
   }
 }

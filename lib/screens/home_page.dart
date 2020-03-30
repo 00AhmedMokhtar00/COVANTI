@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../screens/shops.dart';
 import '../widgets/buttom_navigation_bar.dart';
@@ -8,8 +9,9 @@ import 'news.dart';
 
 class HomePage extends StatefulWidget {
   final String _country, _countryCode;
+  final LatLng cur_location;
   // ignore: sort_constructors_first
-  HomePage(this._country, this._countryCode);
+  HomePage(this._country, this._countryCode, this.cur_location);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -21,8 +23,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _screens = [
-      Home(widget._country),
-      CMap(widget._country),
+      Home(widget._country, widget.cur_location),
+      CMap(widget._country, widget.cur_location),
       Shops(),
       News(widget._countryCode)
     ];

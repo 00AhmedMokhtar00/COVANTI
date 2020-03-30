@@ -8,18 +8,13 @@ class HomeMap extends StatelessWidget {
   GoogleMapController mapController;
   Position position;
   Future _center;
-
-  HomeMap(){_center = getCurrentLocation();}
+  final LatLng cur;
+  HomeMap(this.cur);
 
   void _onMapCreated(GoogleMapController controller) async{
     mapController = controller;
   }
 
-  Future<LatLng> getCurrentLocation()async{
-    Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
-    final cur = LatLng(position.latitude, position.longitude);
-    return cur;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,25 +25,15 @@ class HomeMap extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
       ),
-      child: FutureBuilder(
-        future: _center,
-        builder: (context, snapshot) {
-          if(snapshot.hasData) {
-            return GoogleMap(
+      child: GoogleMap(
               mapType: MapType.normal,
               onMapCreated: _onMapCreated,
               initialCameraPosition: CameraPosition(
-                target: snapshot.data,
+                target: cur,
                 zoom: 4.0,
               ),
-              markers: {_createMarker(snapshot.data)},
-            );
-          }else if(snapshot.hasError){
-            return Text('Please enable location', style: Theme.of(context).textTheme.headline1,);
-          }
-          return Center(child: CircularProgressIndicator());
-        }
-      )
+              markers: {_createMarker(cur)},
+            )
     );
   }
 }

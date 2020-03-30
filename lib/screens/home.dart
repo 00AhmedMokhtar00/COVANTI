@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../widgets/cases.dart';
 import '../widgets/country.dart';
@@ -12,7 +13,8 @@ import '../widgets/title.dart';
 class Home extends StatelessWidget {
 
   final String country;
-  Home(this.country);
+  final LatLng cur_location;
+  Home(this.country, this.cur_location);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class Home extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             CTitle('Home'),
-            HomeMap(),
+            HomeMap(cur_location),
             Country('In $country'),
             Cases(country),
             COVIDInfo(),
