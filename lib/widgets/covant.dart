@@ -31,9 +31,10 @@ class COVANTI extends StatelessWidget {
                   onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (_) => Chatbot()));},
                   child: Container(
                 margin: const EdgeInsets.all(8),
-                decoration: BoxDecoration(boxShadow: [BoxShadow(color: Colors.grey,spreadRadius: 1.4, blurRadius: 2)],shape: BoxShape.circle),
+                decoration: BoxDecoration(boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.4),spreadRadius: 1.4, blurRadius: 2)],shape: BoxShape.circle),
                 child: CircleAvatar(
-                  radius: constrain.maxWidth *0.1,
+                  radius: constrain.maxWidth *0.08,
+                  backgroundColor: Theme.of(context).primaryColor,
                   child: Container(
                     margin: const EdgeInsets.all(10),
                     width: constrain.maxWidth *0.125,
@@ -41,7 +42,8 @@ class COVANTI extends StatelessWidget {
                     decoration: BoxDecoration(
 
                       image: DecorationImage(
-                        fit: BoxFit.fill,
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.topCenter,
                         image: AssetImage("assets/images/doc.png"),
                       ),
                     ),

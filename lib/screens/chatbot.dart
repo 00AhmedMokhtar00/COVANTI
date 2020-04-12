@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
+import 'package:speech_recognition/speech_recognition.dart';
 
 class Chatbot extends StatefulWidget {
   Chatbot({
@@ -17,6 +18,41 @@ class Chatbot extends StatefulWidget {
 class _HomePageDialogflowV2 extends State<Chatbot> {
   final List<ChatMessage> _messages = <ChatMessage>[];
   final TextEditingController _textController = TextEditingController();
+  bool isSent = false;
+
+  SpeechRecognition _speechRecognition;
+  bool _isAvailable = false;
+  bool _isListening = false;
+
+  @override
+  void initState(){
+
+    super.initState();
+  }
+
+  Future<void> initSpeechRecognizer() {
+    _speechRecognition = SpeechRecognition();
+
+    _speechRecognition.setAvailabilityHandler(
+          (bool result) => setState(() => _isAvailable = result),
+    );
+
+    _speechRecognition.setRecognitionStartedHandler(
+          () => setState(() => _isListening = true),
+    );
+
+    _speechRecognition.setRecognitionResultHandler(
+          (String speech) => setState(() {!isSent?_textController.text = speech:isSent = false;}),
+    );
+
+    _speechRecognition.setRecognitionCompleteHandler(
+          () => setState(() { _isListening = false;_handleSubmitted(_textController.text);}),
+    );
+
+    _speechRecognition.activate().then(
+          (result) => setState(() { _isAvailable = result;}),
+    );
+  }
 
   Widget _buildTextComposer() {
     return IconTheme(
@@ -37,7 +73,13 @@ class _HomePageDialogflowV2 extends State<Chatbot> {
               ),
             ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 4.0),
+              child: IconButton(
+                icon: Icon(Icons.mic),
+                onPressed: _onStartRecording,
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(right: 3.0),
               child: IconButton(
                 icon: Icon(Icons.send),
                 onPressed: () => _handleSubmitted(_textController.text),
@@ -74,16 +116,30 @@ class _HomePageDialogflowV2 extends State<Chatbot> {
   }
 
   void _handleSubmitted(String text) {
-    _textController.clear();
-    ChatMessage message = ChatMessage(
-      text: text,
-      name: "Me",
-      type: true,
-    );
-    setState(() {
-      _messages.insert(0, message);
-    });
-    response(text);
+    if(_textController.text.isNotEmpty) {
+      isSent = true;
+      _textController.clear();
+      ChatMessage message = ChatMessage(
+        text: text,
+        name: "Me",
+        type: true,
+      );
+      setState(() {
+        _messages.insert(0, message);
+      });
+      response(text);
+    }
+  }
+
+  void _onStartRecording()async{
+    await initSpeechRecognizer();
+
+    if (_isAvailable && !_isListening) {
+      await _speechRecognition
+          .listen(locale: "en_US")
+          .then((result) => print('$result'));
+    }
+
   }
 
   @override
