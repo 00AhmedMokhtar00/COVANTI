@@ -8,12 +8,13 @@ import '../models/news_item.dart';
 import '../widgets/news_item_design.dart';
 import '../widgets/title.dart';
 
-
 class News extends StatelessWidget {
   final String countryCode;
   Future<Map<String, String>> offlineData;
 
-  News(this.countryCode){offlineData = getData();}
+  News(this.countryCode) {
+    offlineData = getData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,63 +28,66 @@ class News extends StatelessWidget {
     );
   }
 
-  Widget newsBuilder(MQ){
+  Widget newsBuilder(MQ) {
     return Container(
       width: double.infinity,
       height: MQ * 0.88,
-      child: ListView.builder(
-        physics: const BouncingScrollPhysics(),
-
-        itemBuilder: (_, i){
-          return FutureBuilder<Map<String, String>>(
-            future: offlineData,
-            builder: (context, snapshot) {
-
-              if(i == 19){
-                return SizedBox(height: 80,);
-              }
-              if (snapshot.hasData) {
-                return NewsItemDesign(newsItem: NewsItem(title: snapshot.data['newsTitle$i'], description: snapshot.data['newsDescription$i'], url: snapshot.data['newsUrl$i'], img: snapshot.data['newsImg$i']),);
-              }
-              // By default, show a loading spinner.
-              return const Center(child: CircularProgressIndicator());
-            },
-          );
-        },
-        itemCount: 20,
-      ),
+      child: FutureBuilder<Map<String, String>>(
+          future: offlineData,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (_, i) {
+                  if (i == 19) {
+                    return SizedBox(
+                      height: 80,
+                    );
+                  }
+                  return NewsItemDesign(
+                    newsItem: NewsItem(
+                        title: snapshot.data['newsTitle$i'],
+                        description: snapshot.data['newsDescription$i'],
+                        url: snapshot.data['newsUrl$i'],
+                        img: snapshot.data['newsImg$i']),
+                  );
+                  // By default, show a loading spinner.
+                },
+                itemCount: 20,
+              );
+            }else if(snapshot.hasError){
+              return Center(child: Text('Please enable internet to get the latest news', style: TextStyle(color: Colors.red, fontSize: 15, height: 1.4),));
+            }
+            return const Center(child: CircularProgressIndicator());
+          }),
     );
   }
 
-
-  Future<Map<String, String>> getData()async{
+  Future<Map<String, String>> getData() async {
     try {
       await fetchNews();
-    }catch(e){}
-    finally {
+    } catch (e) {} finally {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       Map<String, String> temp = {};
       for (int idx = 0; idx <= 19; idx++) {
-        temp.addAll(
-            {
-              'newsTitle$idx': prefs.getString('newsTitle$idx') ?? ' ',
-              'newsDescription$idx': prefs.getString('newsDescription$idx') ??
-                  ' ',
-              'newsUrl$idx': prefs.getString('newsUrl$idx') ?? ' ',
-              'newsImg$idx': prefs.getString('newsImg$idx') ?? ' ',
-            }
-        );
+        temp.addAll({
+          'newsTitle$idx': prefs.getString('newsTitle$idx') ?? ' ',
+          'newsDescription$idx': prefs.getString('newsDescription$idx') ?? ' ',
+          'newsUrl$idx': prefs.getString('newsUrl$idx') ?? ' ',
+          'newsImg$idx': prefs.getString('newsImg$idx') ?? ' ',
+        });
       }
       return temp;
     }
   }
 
   Future<NewsItem> fetchNews() async {
-    final response = await http.get('http://newsapi.org/v2/top-headlines?country=$countryCode&category=health&apiKey=323019aaa9fd463e83cce512b425a1ab');
+    final response = await http.get(
+        'http://newsapi.org/v2/top-headlines?country=$countryCode&category=health&apiKey=323019aaa9fd463e83cce512b425a1ab');
     var body = json.decode(response.body);
 
     if (response.statusCode == 200) {
-      for(int idx = 0 ; idx <=19 ; idx++) {
+      for (int idx = 0; idx <= 19; idx++) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('newsTitle$idx', body['articles'][idx]['title']);
         prefs.setString(
@@ -94,5 +98,3 @@ class News extends StatelessWidget {
     }
   }
 }
-
-

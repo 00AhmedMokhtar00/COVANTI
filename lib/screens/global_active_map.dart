@@ -97,6 +97,7 @@ class _GlobalActiveMapState extends State<GlobalActiveMap> {
           onTap: () {
             setState(() {
               Info = Container(
+                  height: 200,
                   decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.9),
                       borderRadius: BorderRadius.circular(30)),

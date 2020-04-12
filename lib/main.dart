@@ -24,27 +24,13 @@ fetchCurrentLocation() async {
 }
 
 main(){
-  WidgetsFlutterBinding.ensureInitialized();
-  fetchCurrentLocation();
-  SystemChrome.setEnabledSystemUIOverlays([]);
+
   runApp(MyApp());
 }
 
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
 
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  Future locationData;
-  LatLng cur;
-  @override
-  void initState() {
-    locationData = getAllData();
-    super.initState();
-  }
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -52,27 +38,68 @@ class _MyAppState extends State<MyApp> {
       DeviceOrientation.portraitDown,
     ]);
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'COVANTI',
-      theme: ThemeData(
-        fontFamily: 'SFUIText',
-        textTheme: TextTheme(
-            headline1: TextStyle(color: Colors.black,fontSize: 28, fontWeight: FontWeight.bold),
-            bodyText2: TextStyle(fontSize: 16, color: Colors.black), // Default
-            bodyText1: TextStyle(fontSize: 18, color: Colors.black.withOpacity(0.75),fontWeight: FontWeight.bold), // bottomNavigationBar
+        debugShowCheckedModeBanner: false,
+        title: 'COVANTI',
+        theme: ThemeData(
+            fontFamily: 'SFUIText',
+            textTheme: TextTheme(
+              headline: TextStyle(color: Colors.black,
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold),
+              body2: TextStyle(fontSize: 16, color: Colors.black),
+              // Default
+              body1: TextStyle(fontSize: 18,
+                  color: Colors.black.withOpacity(0.75),
+                  fontWeight: FontWeight.bold), // bottomNavigationBar
 
+            ),
+            primaryColor: Color(0xff1c55d1)
         ),
-        primarySwatch: Colors.blue
-      ),
-      home: FutureBuilder(
+        home: Splash()
+    );
+  }
+}
+
+class Splash extends StatefulWidget {
+  @override
+  _SplashState createState() => _SplashState();
+}
+
+class _SplashState extends State<Splash> {
+  Future locationData;
+  LatLng cur;
+
+  @override
+  void initState() {
+    locationData = getAllData();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final MQH = MediaQuery.of(context).size.height;
+    final MQW = MediaQuery.of(context).size.width;
+    return FutureBuilder(
         future: locationData,
         builder: (context, snapshot) {
           if(snapshot.hasData || snapshot.hasError) {
             return SafeArea(child: HomePage(snapshot.data[0], snapshot.data[1], cur));
           }
-          return SafeArea(child: Container(color: Colors.white,width: double.infinity,height: MediaQuery.of(context).size.height,child: Center(child: CircularProgressIndicator()),));
+          return SafeArea(
+            child: Container(
+              color: Colors.white,
+              width: MQW,
+              height: MQH,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Image.asset('assets/images/splash.jpg', fit: BoxFit.fill,height: 200, width: MQW,),
+                  CircularProgressIndicator()
+                ],
+              ),
+            ),
+          );
         }
-      )
     );
   }
 
@@ -92,7 +119,6 @@ class _MyAppState extends State<MyApp> {
     }
     return [body[idx]['name'].toString(),body[idx]['code'].toString().toLowerCase()];
   }
-
   Future<String> _loadAsset() async {
     return await rootBundle.loadString('assets/countries.json');
   }
@@ -103,3 +129,4 @@ class _MyAppState extends State<MyApp> {
     return cur;
   }
 }
+

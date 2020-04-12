@@ -25,7 +25,7 @@ class AdviceDetails extends StatelessWidget {
 
             children: <Widget>[
               SizedBox(height: 10,),
-              Center(child: Text(advice.title, style: Theme.of(context).textTheme.bodyText1,)),
+              Center(child: Text(advice.title, style: Theme.of(context).textTheme.body1,)),
               SizedBox(height: 15,),
               Container(
                 margin: const EdgeInsets.only(left: 4, top: 4, bottom: 4),

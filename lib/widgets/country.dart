@@ -11,7 +11,7 @@ class Country extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 10, left: 8),
       child: Text(
         country,
-        style: Theme.of(context).textTheme.bodyText1,
+        style: Theme.of(context).textTheme.body1,
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:solution_challenge/screens/chatbot.dart';
 
 class COVANTI extends StatelessWidget {
   @override
@@ -26,7 +27,9 @@ class COVANTI extends StatelessWidget {
                 child: const Center(child: Text('Hi, I am COVANTI, How can I help you?',
                   style: TextStyle(color: Colors.blue, fontSize: 9,fontWeight: FontWeight.bold),)),
               ),
-              Container(
+              GestureDetector(
+                  onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (_) => Chatbot()));},
+                  child: Container(
                 margin: const EdgeInsets.all(8),
                 decoration: BoxDecoration(boxShadow: [BoxShadow(color: Colors.grey,spreadRadius: 1.4, blurRadius: 2)],shape: BoxShape.circle),
                 child: CircleAvatar(
@@ -44,7 +47,8 @@ class COVANTI extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
+              )
+              )
 
             ],
           );

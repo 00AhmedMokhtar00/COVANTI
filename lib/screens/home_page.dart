@@ -41,7 +41,8 @@ class _HomePageState extends State<HomePage> {
       body: Stack(
         children: <Widget>[
           SingleChildScrollView(
-              child: Container(height: MQH,width: MQW,margin: const EdgeInsets.only(left: 10, right: 10, top: 30, bottom: 60),child: _screens[_currentIndex]),
+            physics: BouncingScrollPhysics(),
+              child: Container(height: MQH,width: MQW,margin: const EdgeInsets.only(left: 10, right: 10, top: 30, bottom: 90),child: _screens[_currentIndex]),
           ),
           Align(
             alignment: Alignment.bottomCenter,

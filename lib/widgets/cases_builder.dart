@@ -11,10 +11,10 @@ class CasesBuilder extends StatelessWidget {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(totalCases.toString(),style: Theme.of(context).textTheme.headline1,),
+          Text(totalCases.toString(),style: Theme.of(context).textTheme.headline,),
           const SizedBox(height: 5,),
           const Text('Confirmed cases'),
-          const SizedBox(height: 10,),
+          const SizedBox(height: 8,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
@@ -29,7 +29,7 @@ class CasesBuilder extends StatelessWidget {
             ],
           ),
           Text('last update: $covLastUpdate',style: TextStyle(color: Colors.grey,fontSize: 8),),
-          const SizedBox(height: 10,),
+          const SizedBox(height: 5,),
         ]
     );
   }

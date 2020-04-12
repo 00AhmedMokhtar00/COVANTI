@@ -9,7 +9,7 @@ class COVIDInfo extends StatelessWidget {
     return GestureDetector(
       onTap: _launchURL,
       child: Container(
-          margin: EdgeInsets.symmetric(vertical: 10),
+          margin: EdgeInsets.symmetric(vertical: 8),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             boxShadow: [BoxShadow(blurRadius: 4,color: Colors.grey)],

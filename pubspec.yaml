@@ -35,6 +35,7 @@ dependencies:
   json_serializable: ^2.0.2
   location_permissions: ^2.0.5
   location: ^3.0.1
+  flutter_dialogflow: ^0.1.3
 
 dev_dependencies:
   pedantic: ^1.4.0
@@ -60,6 +61,7 @@ flutter:
    - assets/icons/
    - assets/images/advices/
    - assets/countries.json
+   - assets/chatbot.json
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
