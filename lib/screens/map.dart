@@ -16,17 +16,20 @@ class CMap extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            CTitle('Map'),
-            GlobalMap(cur_location),
-            Country('Globally'),
-            GlobalCases(),
-            Country('In $country'),
-            Cases(country),
-          ],
-        );
+    return SingleChildScrollView(
+      child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              CTitle('Map'),
+              GlobalMap(cur_location),
+              Country('Globally'),
+              GlobalCases(),
+              Country('In $country'),
+              Cases(country),
+              SizedBox(height: 120,)
+            ],
+          ),
+    );
   }
 }
 

@@ -23,7 +23,8 @@ class News extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         CTitle('News'),
-        newsBuilder(MQ),
+        Expanded(child: newsBuilder(MQ)),
+        SizedBox(height: 30,)
       ],
     );
   }
@@ -31,7 +32,6 @@ class News extends StatelessWidget {
   Widget newsBuilder(MQ) {
     return Container(
       width: double.infinity,
-      height: MQ * 0.88,
       child: FutureBuilder<Map<String, String>>(
           future: offlineData,
           builder: (context, snapshot) {

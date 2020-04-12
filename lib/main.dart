@@ -6,10 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sim_country_code/flutter_sim_country_code.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'screens/home_page.dart';
 
-fetchCurrentLocation() async {
+Future<void>fetchCurrentLocation() async {
   var location = Location();
   location.changeSettings(accuracy: LocationAccuracy.high);
   if (await location.hasPermission() != true) {
@@ -23,8 +24,12 @@ fetchCurrentLocation() async {
   }
 }
 
-main(){
 
+
+main()async{
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Permission.microphone.request().isGranted;
   runApp(MyApp());
 }
 

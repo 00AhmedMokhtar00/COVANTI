@@ -12,7 +12,7 @@ class COVANTI extends StatelessWidget {
             children: <Widget>[
 
               Container(
-                margin: const EdgeInsets.all(10),
+                margin: const EdgeInsets.only(top: 10),
                 padding: const EdgeInsets.all(10),
                 width:  constWidth * 0.65,
                 height: constWidth * 0.13,
@@ -30,21 +30,17 @@ class COVANTI extends StatelessWidget {
               GestureDetector(
                   onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (_) => Chatbot()));},
                   child: Container(
-                margin: const EdgeInsets.all(8),
-                decoration: BoxDecoration(boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.4),spreadRadius: 1.4, blurRadius: 2)],shape: BoxShape.circle),
+                margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                //decoration: BoxDecoration(boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.4),spreadRadius: 1.4, blurRadius: 2)],shape: BoxShape.circle),
                 child: CircleAvatar(
-                  radius: constrain.maxWidth *0.08,
-                  backgroundColor: Theme.of(context).primaryColor,
+                  radius: constrain.maxWidth *0.1,
+                  backgroundColor: Colors.transparent,
                   child: Container(
-                    margin: const EdgeInsets.all(10),
-                    width: constrain.maxWidth *0.125,
-                    height: constrain.maxWidth *0.125,
                     decoration: BoxDecoration(
-
                       image: DecorationImage(
-                        fit: BoxFit.scaleDown,
+                        fit: BoxFit.fill,
                         alignment: Alignment.topCenter,
-                        image: AssetImage("assets/images/doc.png"),
+                        image: AssetImage("assets/images/cov.png"),
                       ),
                     ),
                   ),

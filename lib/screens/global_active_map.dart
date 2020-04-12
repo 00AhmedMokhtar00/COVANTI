@@ -18,37 +18,36 @@ class _GlobalActiveMapState extends State<GlobalActiveMap> {
   final Map<String, Marker> _markers = {};
   var _mapType = [MapType.normal,MapType.satellite,MapType.hybrid];
   int index = 0;
+  bool isMarkerClicked = false;
   Widget Info = Container(
     color: Colors.transparent,
   );
   Future start_map;
-  @override
-  void initState() {
-    // start_map = _onMapCreated(controller);
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: FloatingActionButton(
-        elevation: 5,
-        backgroundColor: Colors.black.withOpacity(0.5),
-        child: Icon(Icons.remove_red_eye, size: 30,),
-        onPressed: (){
-        setState(() {
-          if(index == 2)
-            index = 0;
-          else
-            index++;
-        });
-      },),
+      floatingActionButton: Container(
+        margin: const EdgeInsets.only(top: 100),
+        child: FloatingActionButton(
+          elevation: 5,
+          backgroundColor: Colors.black.withOpacity(0.5),
+          child: Icon(Icons.remove_red_eye, size: 30,),
+          onPressed: (){
+          setState(() {
+            if(index == 2)
+              index = 0;
+            else
+              index++;
+          });
+        },),
+      ),
       body: Stack(
         children: <Widget>[
           GoogleMap(
             onTap: (loc){
               setState(() {
+                isMarkerClicked = false;
                 Info = Container(
                   color: Colors.transparent,
                 );
@@ -73,16 +72,16 @@ class _GlobalActiveMapState extends State<GlobalActiveMap> {
                 },
                 color: Colors.white,
               )),
-          Align(
+          isMarkerClicked?Align(
             alignment: Alignment.bottomCenter,
             child: Container(
                 padding: const EdgeInsets.all(20),
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 color: Colors.transparent,
                 width: double.infinity,
-                height: 200,
+                height: 200.0,
                 child: Info),
-          ),
+          ):Container(),
         ],
       ),
     );
@@ -95,9 +94,10 @@ class _GlobalActiveMapState extends State<GlobalActiveMap> {
       for (final country in AllCountries.countries) {
         final marker = Marker(
           onTap: () {
+            isMarkerClicked = true;
             setState(() {
               Info = Container(
-                  height: 200,
+                height: 200.0,
                   decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.9),
                       borderRadius: BorderRadius.circular(30)),

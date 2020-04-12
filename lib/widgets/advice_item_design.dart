@@ -8,7 +8,7 @@ class AdviceItemDesign extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.symmetric(vertical: 10),
+        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           boxShadow: [BoxShadow(blurRadius: 4,color: Colors.grey)],
@@ -19,7 +19,7 @@ class AdviceItemDesign extends StatelessWidget {
             return Row(
               children: <Widget>[
                 Container(
-                  margin: const EdgeInsets.only(left: 4, top: 4, bottom: 4),
+                  margin: const EdgeInsets.only(left: 2.0, top: 4, bottom: 3.0, right: 3.0),
                   width:  constrain.maxWidth * 0.27,
                   height: constrain.maxWidth * 0.27,
                   decoration: BoxDecoration(
@@ -30,9 +30,11 @@ class AdviceItemDesign extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: ListTile(
-                    title: Text(advice.title, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),),
-                    trailing: IconButton(icon: Icon(Icons.navigate_next,color: Colors.blue,size: 30,)),
+                  child: Row(
+                    children: <Widget>[
+                    Expanded(child: Text(advice.title, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),)),
+                    IconButton(icon: Icon(Icons.navigate_next,color: Colors.blue,size: 30,)),
+                    ]
                   ),
                 ),
               ],

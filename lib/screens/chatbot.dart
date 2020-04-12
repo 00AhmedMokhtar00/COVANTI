@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:speech_recognition/speech_recognition.dart';
 
 class Chatbot extends StatefulWidget {
@@ -20,18 +21,19 @@ class _HomePageDialogflowV2 extends State<Chatbot> {
   final TextEditingController _textController = TextEditingController();
   bool isSent = false;
 
-  SpeechRecognition _speechRecognition;
+  FlutterTts flutterTts = FlutterTts();
+  SpeechRecognition _speechRecognition = SpeechRecognition();
   bool _isAvailable = false;
   bool _isListening = false;
 
-  @override
-  void initState(){
 
-    super.initState();
+
+
+  Future _speak(String txt) async{
+    await flutterTts.speak(txt);
   }
 
   Future<void> initSpeechRecognizer() {
-    _speechRecognition = SpeechRecognition();
 
     _speechRecognition.setAvailabilityHandler(
           (bool result) => setState(() => _isAvailable = result),
@@ -42,11 +44,12 @@ class _HomePageDialogflowV2 extends State<Chatbot> {
     );
 
     _speechRecognition.setRecognitionResultHandler(
-          (String speech) => setState(() {!isSent?_textController.text = speech:isSent = false;}),
+          (_) => setState(() { _isListening = false;_handleSubmitted(_textController.text);}),
+
     );
 
     _speechRecognition.setRecognitionCompleteHandler(
-          () => setState(() { _isListening = false;_handleSubmitted(_textController.text);}),
+          (String speech) => setState(() {!isSent?_textController.text = speech:isSent = false;}),
     );
 
     _speechRecognition.activate().then(
@@ -112,13 +115,14 @@ class _HomePageDialogflowV2 extends State<Chatbot> {
     );
     setState(() {
       _messages.insert(0, message);
+      _speak(response.getMessage());
     });
   }
 
   void _handleSubmitted(String text) {
     if(_textController.text.isNotEmpty) {
       isSent = true;
-      _textController.clear();
+      //_textController.clear();
       ChatMessage message = ChatMessage(
         text: text,
         name: "Me",
@@ -128,16 +132,16 @@ class _HomePageDialogflowV2 extends State<Chatbot> {
         _messages.insert(0, message);
       });
       response(text);
+
     }
   }
 
   void _onStartRecording()async{
     await initSpeechRecognizer();
-
+    await flutterTts.stop();
     if (_isAvailable && !_isListening) {
       await _speechRecognition
-          .listen(locale: "en_US")
-          .then((result) => print('$result'));
+          .listen(locale: "en_US");
     }
 
   }
@@ -163,6 +167,11 @@ class _HomePageDialogflowV2 extends State<Chatbot> {
         ),
       ]),
     );
+  }
+  @override
+  void dispose(){
+    flutterTts.stop();
+    super.dispose();
   }
 }
 

@@ -19,18 +19,21 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            CTitle('Home'),
-            HomeMap(cur_location),
-            Country('In $country'),
-            Cases(country),
-            COVIDInfo(),
-            const ProtectYourselfButton(),
-            COVANTI(),
-          ],
-        );
+    return SingleChildScrollView(
+      child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              CTitle('Home'),
+              HomeMap(cur_location),
+              Country('In $country'),
+              Cases(country),
+              COVIDInfo(),
+              const ProtectYourselfButton(),
+              COVANTI(),
+              SizedBox(height: 120,)
+            ],
+          ),
+    );
   }
 
 }

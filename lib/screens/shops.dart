@@ -25,36 +25,39 @@ class _ShopsState extends State<Shops> with TickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-      CTitle('Shops'),
-      TabBar(
-        isScrollable: false,
-        controller: _tabController,
-        labelColor: Colors.white,
-        unselectedLabelColor: Colors.blue,
-        indicatorColor: Colors.transparent,
-        onTap: (idx) {
-          setState(() {
-            _tabController.index = idx;
-          });
-        },
-        tabs: [
-          Tab(child: CTab(title: 'All',color: _tabController.index == 0? Colors.blue: Colors.white,)),
-          Tab(child: CTab(title: 'Pharmacies',color: _tabController.index == 1? Colors.blue: Colors.white)),
-          Tab(child: CTab(title: 'Supermarkets',color: _tabController.index == 2? Colors.blue: Colors.white)),
-        ],
-      ),
-      Container(
-        width: double.infinity,
-        height: MediaQuery.of(context).size.height * 0.8,
-        child: TabBarView(
-          physics: NeverScrollableScrollPhysics(),
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+        CTitle('Shops'),
+        TabBar(
+          isScrollable: false,
           controller: _tabController,
-          children: [All(), Pharmacies(), SuperMarkets()],
+          labelColor: Colors.white,
+          unselectedLabelColor: Colors.blue,
+          indicatorColor: Colors.transparent,
+          onTap: (idx) {
+            setState(() {
+              _tabController.index = idx;
+            });
+          },
+          tabs: [
+            Tab(child: CTab(title: 'All',color: _tabController.index == 0? Colors.blue: Colors.white,)),
+            Tab(child: CTab(title: 'Pharmacies',color: _tabController.index == 1? Colors.blue: Colors.white)),
+            Tab(child: CTab(title: 'Supermarkets',color: _tabController.index == 2? Colors.blue: Colors.white)),
+          ],
         ),
-      ),
-    ]);
+        Container(
+          width: double.infinity,
+          height: MediaQuery.of(context).size.height * 0.8,
+          child: TabBarView(
+            physics: NeverScrollableScrollPhysics(),
+            controller: _tabController,
+            children: [All(), Pharmacies(), SuperMarkets()],
+          ),
+        ),
+        SizedBox(height: 120,)
+      ]),
+    );
   }
 }

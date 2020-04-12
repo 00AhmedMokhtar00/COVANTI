@@ -9,7 +9,7 @@ class COVIDInfo extends StatelessWidget {
     return GestureDetector(
       onTap: _launchURL,
       child: Container(
-          margin: EdgeInsets.symmetric(vertical: 8),
+          margin: EdgeInsets.symmetric(vertical: 6.0, horizontal: 2.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             boxShadow: [BoxShadow(blurRadius: 4,color: Colors.grey)],
@@ -34,7 +34,7 @@ class COVIDInfo extends StatelessWidget {
                   Expanded(
                     child: ListTile(
                       contentPadding: EdgeInsets.all(2),
-                      title: Text('What is Coronavirus?', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 13),),
+                      title: Text('What is Coronavirus?', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),),
                       subtitle: const Text(COVID, style: TextStyle(fontSize: 8,),),
                       trailing: IconButton(icon: Icon(Icons.navigate_next,color: Colors.blue,size: 30,)),
                     ),
