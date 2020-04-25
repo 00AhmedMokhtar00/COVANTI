@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.bold), // bottomNavigationBar
 
             ),
-            primaryColor: Color(0xff1c55d1)
+            primaryColor: Color(0xff153E87)
         ),
         home: Splash()
     );
@@ -99,7 +99,7 @@ class _SplashState extends State<Splash> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Image.asset('assets/images/splash.png', fit: BoxFit.cover,),
+                  Image.asset('assets/images/splash.png', fit: BoxFit.cover, width: MQW * 0.8,),
                   CircularProgressIndicator()
                 ],
               ),

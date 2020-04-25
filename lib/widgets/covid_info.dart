@@ -5,11 +5,11 @@ import 'package:url_launcher/url_launcher.dart';
 class COVIDInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    const String COVID = '(COVID-19) is an infectious diseas caused by the servere acute respiratory syndrome coronavirus 2 (SARS-CoV-2).The diseas has spread globally since ...';
+    //const String COVID = '(COVID-19) is an infectious diseas caused by the servere acute respiratory syndrome coronavirus 2 (SARS-CoV-2).The diseas has spread globally since ...';
     return GestureDetector(
       onTap: _launchURL,
       child: Container(
-          margin: EdgeInsets.symmetric(vertical: 6.0, horizontal: 2.0),
+          margin: EdgeInsets.symmetric(vertical: 6.0, horizontal: 5.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             boxShadow: [BoxShadow(blurRadius: 4,color: Colors.grey)],
@@ -19,9 +19,10 @@ class COVIDInfo extends StatelessWidget {
             builder: (_, constrain){
               final constWidth = constrain.maxWidth;
               return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    margin: const EdgeInsets.only(left: 10, top: 4, bottom: 4, right: 5.0),
                     width: constWidth * 0.27,
                     height: constWidth * 0.27,
                     decoration: BoxDecoration(
@@ -31,14 +32,8 @@ class COVIDInfo extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Expanded(
-                    child: ListTile(
-                      contentPadding: EdgeInsets.all(2),
-                      title: Text('What is Coronavirus?', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12),),
-                      subtitle: const Text(COVID, style: TextStyle(fontSize: 8,),),
-                      trailing: IconButton(icon: Icon(Icons.navigate_next,color: Colors.blue,size: 30,)),
-                    ),
-                  ),
+                  Text('What is Coronavirus?', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
+                  Icon(Icons.navigate_next,color: Theme.of(context).primaryColor,size: 40,),
                 ],
               );
             },

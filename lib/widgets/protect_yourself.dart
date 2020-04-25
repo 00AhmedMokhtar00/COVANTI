@@ -10,9 +10,9 @@ class ProtectYourselfButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(30),
       onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (_) => ProtectYourself()));},
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10),
+        margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 5.0),
         width: MQ.width,
-        height: MQ.height * 0.06,
+        height: MQ.height * 0.07,
         decoration: BoxDecoration(
             color: Theme.of(context).primaryColor,
             borderRadius: BorderRadius.circular(15),

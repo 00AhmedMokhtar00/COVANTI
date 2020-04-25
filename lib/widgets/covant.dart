@@ -14,18 +14,18 @@ class COVANTI extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.only(top: 10),
                 padding: const EdgeInsets.all(10),
-                width:  constWidth * 0.65,
+                width:  constWidth * 0.68,
                 height: constWidth * 0.13,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.only(topRight: Radius.circular(30), topLeft: Radius.circular(30), bottomLeft: Radius.circular(30)),
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
                           spreadRadius: 1, color: Colors.grey, blurRadius: 3)
                     ]
                 ),
-                child: const Center(child: Text('Hi, I am COVANTI, How can I help you?',
-                  style: TextStyle(color: Colors.blue, fontSize: 9,fontWeight: FontWeight.bold),)),
+                child: Center(child: Text('Hi, I am COVANTI, How can I help you?',
+                  style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 9.5,fontWeight: FontWeight.bold),)),
               ),
               GestureDetector(
                   onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (_) => Chatbot()));},

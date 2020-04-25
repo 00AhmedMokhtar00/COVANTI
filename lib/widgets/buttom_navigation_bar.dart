@@ -26,7 +26,7 @@ class CButtomNavigationBar extends StatelessWidget {
           type: BottomNavigationBarType.fixed,
           onTap: (idx) {onSelect(idx);}, // new
           currentIndex: index, // new
-          selectedItemColor: Colors.blue,
+          selectedItemColor: Theme.of(context).primaryColor,
           selectedFontSize: 12,
           unselectedFontSize: 12,
           unselectedItemColor: Colors.grey,
