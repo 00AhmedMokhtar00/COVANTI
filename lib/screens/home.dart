@@ -12,9 +12,10 @@ import '../widgets/title.dart';
 
 class Home extends StatelessWidget {
 
+  Home(this.country, this.cur_location);
+
   final String country;
   final LatLng cur_location;
-  Home(this.country, this.cur_location);
 
   @override
   Widget build(BuildContext context) {

@@ -79,7 +79,7 @@ class _GlobalActiveMapState extends State<GlobalActiveMap> {
                 margin: const EdgeInsets.symmetric(horizontal: 10),
                 color: Colors.transparent,
                 width: double.infinity,
-                height: 200.0,
+                //height: 200.0,
                 child: Info),
           ):Container(),
         ],
@@ -97,7 +97,7 @@ class _GlobalActiveMapState extends State<GlobalActiveMap> {
             isMarkerClicked = true;
             setState(() {
               Info = Container(
-                height: 200.0,
+                  height: MediaQuery.of(context).size.height * 0.27,
                   decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.9),
                       borderRadius: BorderRadius.circular(30)),
@@ -105,9 +105,9 @@ class _GlobalActiveMapState extends State<GlobalActiveMap> {
                       int.parse(country.cases),
                       int.parse(country.deaths),
                       int.parse(country.recovered),
-                      DateFormat.yMMMd().format(DateTime.now()) +
-                          ' ' +
-                          DateFormat.Hm().format(DateTime.now())));
+                      int.parse(country.todayCases),
+                      int.parse(country.todayDeaths),
+                      DateFormat.yMMMd().format(DateTime.now()) + ' ' + DateFormat.Hm().format(DateTime.now())));
             });
           },
           markerId: MarkerId(country.name),

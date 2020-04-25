@@ -25,6 +25,8 @@ class AllCountries {
     this.cases,
     this.deaths,
     this.recovered,
+    this.todayDeaths,
+    this.todayCases,
     this.lat,
     this.lng,
     this.name,
@@ -39,6 +41,8 @@ class AllCountries {
   final String cases;
   final String deaths;
   final String recovered;
+  final String todayCases;
+  final String todayDeaths;
 }
 
 @JsonSerializable()
@@ -55,7 +59,7 @@ class Locations {
 }
 
 Future<Locations> getAllCountries() async {
-  const LocationsURL = 'https://corona.lmao.ninja/countries';
+  const LocationsURL = 'https://corona.lmao.ninja/v2/countries';
 
   // Retrieve the locations of Google offices
   final response = await http.get(LocationsURL);

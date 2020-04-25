@@ -5,11 +5,11 @@ import 'package:geolocator/geolocator.dart';
 
 class HomeMap extends StatelessWidget {
 
+  HomeMap(this.cur);
+
   GoogleMapController mapController;
   Position position;
-  Future _center;
   final LatLng cur;
-  HomeMap(this.cur);
 
   void _onMapCreated(GoogleMapController controller) async{
     mapController = controller;

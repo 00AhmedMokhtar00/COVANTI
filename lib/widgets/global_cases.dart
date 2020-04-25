@@ -21,8 +21,13 @@ class GlobalCases extends StatelessWidget {
       builder: (context, snapshot) {
         if(connectionAvailable || snapshot.data['cases'] != 0) {
           if (snapshot.hasData || snapshot.hasError) {
-            return CasesBuilder(snapshot.data['cases'], snapshot.data['deaths'],
-                snapshot.data['recovered'], covLastUpdate);
+            return CasesBuilder(
+                snapshot.data['cases'],
+                snapshot.data['deaths'],
+                snapshot.data['recovered'],
+                snapshot.data['todayCases'],
+                snapshot.data['todayDeaths'],
+                covLastUpdate);
           }
         }else{
           return Center(child: Text('Please enable internet connection to get the statistics',textAlign: TextAlign.center,style: TextStyle(color: Colors.red),));
@@ -45,19 +50,23 @@ class GlobalCases extends StatelessWidget {
         'cases': prefs.getInt('globalcases') ?? 0,
         'deaths': prefs.getInt('globaldeaths') ?? 0,
         'recovered': prefs.getInt('globalrecovered') ?? 0,
+        'todayCases': prefs.getInt('todayCases') ?? 0,
+        'todayDeaths': prefs.getInt('todayDeaths') ?? 0,
       };
     }
   }
 
   Future<void> fetchGlobalCase() async {
-    final response = await http.get('https://corona.lmao.ninja/all');
+    final response = await http.get('https://corona.lmao.ninja/v2/all');
     var body = json.decode(response.body);
     if (response.statusCode == 200) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setInt('globalcases', body['cases']??0);
-      prefs.setInt('globaldeaths', body['deaths']??0);
-      prefs.setInt('globalrecovered', body['recovered']??0);
-      prefs.setString('covidlastupdate', DateFormat.yMMMd().format(DateTime.now())+ ' '+DateFormat.Hm().format(DateTime.now()));
+      await prefs.setInt('globalcases', body['cases']??0);
+      await prefs.setInt('globaldeaths', body['deaths']??0);
+      await prefs.setInt('globalrecovered', body['recovered']??0);
+      await prefs.setInt('todayCases', body['todayCases']??0);
+      await prefs.setInt('todayDeaths', body['todayDeaths']??0);
+      await prefs.setString('covidlastupdate', DateFormat.yMMMd().format(DateTime.now())+ ' '+DateFormat.Hm().format(DateTime.now()));
     } else {
       print('exception');
       throw Exception('Failed to load cases');

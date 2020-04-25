@@ -10,19 +10,19 @@ import 'package:permission_handler/permission_handler.dart';
 
 import 'screens/home_page.dart';
 
-Future<void>fetchCurrentLocation() async {
-  var location = Location();
-  location.changeSettings(accuracy: LocationAccuracy.high);
-  if (await location.hasPermission() != true) {
-    await location.requestPermission();
-  }
-  try {
-    await location.onLocationChanged.listen((LocationData currentLocation) {
-    });
-  } on PlatformException {
-    location = null;
-  }
-}
+//Future<void>fetchCurrentLocation() async {
+//  var location = Location();
+//  location.changeSettings(accuracy: LocationAccuracy.high);
+//  if (await location.hasPermission() != true) {
+//    await location.requestPermission();
+//  }
+//  try {
+//    await location.onLocationChanged.listen((LocationData currentLocation) {
+//    });
+//  } on PlatformException {
+//    location = null;
+//  }
+//}
 
 
 
@@ -30,6 +30,7 @@ main()async{
 
   WidgetsFlutterBinding.ensureInitialized();
   await Permission.microphone.request().isGranted;
+  await Permission.location.request().isGranted;
   runApp(MyApp());
 }
 
@@ -87,7 +88,7 @@ class _SplashState extends State<Splash> {
     return FutureBuilder(
         future: locationData,
         builder: (context, snapshot) {
-          if(snapshot.hasData || snapshot.hasError) {
+          if(snapshot.connectionState == ConnectionState.done) {
             return SafeArea(child: HomePage(snapshot.data[0], snapshot.data[1], cur));
           }
           return SafeArea(
@@ -98,7 +99,7 @@ class _SplashState extends State<Splash> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Image.asset('assets/images/splash.jpg', fit: BoxFit.fill,height: 200, width: MQW,),
+                  Image.asset('assets/images/splash.png', fit: BoxFit.cover,),
                   CircularProgressIndicator()
                 ],
               ),

@@ -24,7 +24,9 @@ AllCountries _$OfficeFromJson(Map<String, dynamic> json) {
       name: json['country'] as String,
       cases: (json['cases'] as num).toString(),
       deaths: (json['deaths'] as num).toString(),
-      recovered: (json['recovered'] as num).toString()
+      recovered: (json['recovered'] as num).toString(),
+      todayCases: (json['todayCases'] as num).toString(),
+      todayDeaths: (json['todayDeaths'] as num).toString(),
   );
 }
 
@@ -34,7 +36,9 @@ Map<String, dynamic> _$OfficeToJson(AllCountries instance) => <String, dynamic>{
       'name': instance.name,
       'cases': instance.cases,
       'deaths': instance.deaths,
-      'recovered': instance.recovered
+      'recovered': instance.recovered,
+      'todayCases': instance.todayCases,
+      'todayDeaths': instance.todayDeaths
     };
 
 Locations _$LocationsFromJson(List<dynamic> json) {
