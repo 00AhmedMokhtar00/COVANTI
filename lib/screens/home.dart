@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/cases.dart';
 import '../widgets/country.dart';
@@ -24,7 +25,18 @@ class Home extends StatelessWidget {
       child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              CTitle('Home'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  CTitle('Home'),
+                  FloatingActionButton(
+                    onPressed: _test,
+                    backgroundColor: Theme.of(context).primaryColor,
+                    child: Icon(Icons.verified_user),
+                    mini: true,
+                  )
+                ],
+              ),
               HomeMap(cur_location),
               Country('In $country'),
               Cases(country),
@@ -37,6 +49,15 @@ class Home extends StatelessWidget {
     );
   }
 
+
+  Future<void> _test() async {
+    const url = 'https://covapp.charite.de/questionnaire';
+    if (await canLaunch(url)) {
+    await launch(url);
+    } else {
+    throw 'Could not launch $url';
+    }
+  }
 }
 
 

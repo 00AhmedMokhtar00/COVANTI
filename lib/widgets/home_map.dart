@@ -25,15 +25,7 @@ class HomeMap extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
       ),
-      child: GoogleMap(
-              mapType: MapType.normal,
-              onMapCreated: _onMapCreated,
-              initialCameraPosition: CameraPosition(
-                target: cur,
-                zoom: 4.0,
-              ),
-              markers: {_createMarker(cur)},
-            )
+      child: Image.network('https://maps.googleapis.com/maps/api/staticmap?center=&${cur.latitude},${cur.longitude}&zoom=16&size=600x300&maptype=roadmap&markers=color:red%7Clabel:A%7C${cur.latitude},${cur.longitude}&key=AIzaSyDScFkj7iFL-Ks9MNWVNrmKjOVrNDbnQo4')
     );
   }
 }
@@ -45,3 +37,22 @@ Marker _createMarker(LatLng pos) {
       icon: BitmapDescriptor.defaultMarker,
     );
 }
+
+/*
+String generateLocationPreviewImage({double latitude, double longitude,}) {
+    return 'https://maps.googleapis.com/maps/api/staticmap?center=&$latitude,$longitude&zoom=16&size=600x300&maptype=roadmap&markers=color:red%7Clabel:A%7C$latitude,$longitude&key=$GOOGLE_API_KEY';
+  }
+ */
+
+
+/*
+GoogleMap(
+              mapType: MapType.normal,
+              onMapCreated: _onMapCreated,
+              initialCameraPosition: CameraPosition(
+                target: cur,
+                zoom: 4.0,
+              ),
+              markers: {_createMarker(cur)},
+            )
+ */
