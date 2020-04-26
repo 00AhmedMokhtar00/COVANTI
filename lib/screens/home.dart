@@ -31,8 +31,9 @@ class Home extends StatelessWidget {
                   CTitle('Home'),
                   FloatingActionButton(
                     onPressed: _test,
+                    tooltip: 'coronavirus test',
                     backgroundColor: Theme.of(context).primaryColor,
-                    child: Icon(Icons.verified_user),
+                    child: Icon(Icons.verified_user, color: Colors.white,),
                     mini: true,
                   )
                 ],

@@ -52,6 +52,12 @@ class MyApp extends StatelessWidget {
               headline: TextStyle(color: Colors.black,
                   fontSize: 28,
                   fontWeight: FontWeight.bold),
+              display2: TextStyle(color: Colors.red,
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold),
+              display1: TextStyle(color: Colors.green,
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold),
               body2: TextStyle(fontSize: 16, color: Colors.black),
               // Default
               body1: TextStyle(fontSize: 18,
@@ -59,7 +65,9 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.bold), // bottomNavigationBar
 
             ),
-            primaryColor: Color(0xff153E87)
+            primaryColor: Color(0xff153E87),
+            accentColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.white),
         ),
         home: Splash()
     );
@@ -100,7 +108,7 @@ class _SplashState extends State<Splash> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Image.asset('assets/images/splash.png', fit: BoxFit.cover, width: MQW * 0.8,),
-                  CircularProgressIndicator()
+                  CircularProgressIndicator(backgroundColor: Theme.of(context).primaryColor)
                 ],
               ),
             ),

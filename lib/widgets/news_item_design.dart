@@ -16,7 +16,7 @@ class NewsItemDesign extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           boxShadow: [BoxShadow(blurRadius: 4,color: Colors.grey)],
-          color: Colors.white,
+          color: Color(0xfffffdff),
         ),
         child: LayoutBuilder(
           builder: (_, constrain){
@@ -33,15 +33,15 @@ class NewsItemDesign extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                       image: DecorationImage(
                         fit: BoxFit.fill,
-                        image: CachedNetworkImageProvider(newsItem.img??'assets/images/news.png')
+                        image: newsItem.img != ' '? CachedNetworkImageProvider(newsItem.img): AssetImage('assets/images/news.png')
                       ),
                     ),
                   ),
                   const SizedBox(height: 6,),
                   Text(newsItem.title??' ', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),textAlign: TextAlign.center,textDirection: TextDirection.rtl,),
                   const SizedBox(height: 6,),
-                  Text(newsItem.description??' ', style: TextStyle(fontSize: 9),textAlign: TextAlign.center,textDirection: TextDirection.rtl,),
-                  Center(child: FlatButton(shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),child: Text('Read more',style: TextStyle(color: Colors.blue),),onPressed: () =>_launchURL(newsItem.url),))
+                  Text(newsItem.description??' ', style: TextStyle(fontSize: 9.5),textAlign: TextAlign.right,textDirection: TextDirection.rtl,),
+                  Center(child: FlatButton(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),child: Text('Read more',style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),),onPressed: () =>_launchURL(newsItem.url),))
 
                 ],
               ),

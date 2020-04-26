@@ -14,6 +14,7 @@ class GlobalActiveMap extends StatefulWidget {
 }
 
 class _GlobalActiveMapState extends State<GlobalActiveMap> {
+  bool isLoading = false;
   GoogleMapController controller;
   final Map<String, Marker> _markers = {};
   var _mapType = [MapType.normal,MapType.satellite,MapType.hybrid];
@@ -32,13 +33,15 @@ class _GlobalActiveMapState extends State<GlobalActiveMap> {
         child: FloatingActionButton(
           elevation: 5,
           backgroundColor: Colors.black.withOpacity(0.5),
-          child: Icon(Icons.remove_red_eye, size: 30,),
+          child: Icon(Icons.remove_red_eye, size: 30, color: Colors.white,),
           onPressed: (){
           setState(() {
-            if(index == 2)
+            if(index == 2) {
               index = 0;
-            else
+            }
+            else {
               index++;
+            }
           });
         },),
       ),
@@ -82,12 +85,14 @@ class _GlobalActiveMapState extends State<GlobalActiveMap> {
                 //height: 200.0,
                 child: Info),
           ):Container(),
+          isLoading?Center(child: CircularProgressIndicator(backgroundColor: Theme.of(context).primaryColor,)):Container()
         ],
       ),
     );
   }
 
   Future<void> _onMapCreated(GoogleMapController controller) async {
+    setState(() {isLoading = true;});
     final AllCountries = await locations.getAllCountries();
     setState(() {
       _markers.clear();
@@ -120,6 +125,7 @@ class _GlobalActiveMapState extends State<GlobalActiveMap> {
         );
         _markers[country.name] = marker;
       }
+      isLoading = false;
     });
   }
 }

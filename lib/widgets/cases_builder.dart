@@ -16,11 +16,11 @@ class CasesBuilder extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(NumberFormat.decimalPattern().format(totalCases),style: Theme.of(context).textTheme.headline,),
-              Text('+' + NumberFormat.decimalPattern().format(todayCases) + ' today', style: TextStyle(fontSize: 10),),
             ],
           ),
           const SizedBox(height: 5,),
           const Text('Confirmed cases'),
+          Text('+' + NumberFormat.decimalPattern().format(todayCases) + ' today', style: TextStyle(fontSize: 10),),
           const SizedBox(height: 8,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -28,18 +28,20 @@ class CasesBuilder extends StatelessWidget {
               Column(children: <Widget>[
                 Column(
                   children: <Widget>[
-                    Text( NumberFormat.decimalPattern().format(deathCases) ,style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 30),),
-                    Text('+' + NumberFormat.decimalPattern().format(todayDeaths) + ' today', style: TextStyle(color: Colors.red, fontSize: 10),),
+                    Text( NumberFormat.decimalPattern().format(deathCases) ,style: Theme.of(context).textTheme.display2),
                   ],
                 ),
-                const Text('Deaths')
+                const Text('Deaths'),
+                Text('+' + NumberFormat.decimalPattern().format(todayDeaths) + ' today', style: TextStyle(color: Colors.red, fontSize: 10),),
               ],),
               Column(children: <Widget>[
-                Text(NumberFormat.decimalPattern().format(recoverCases),style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 30),),
-                const Text('Cured')
+                Text(NumberFormat.decimalPattern().format(recoverCases),style: Theme.of(context).textTheme.display1),
+                const Text('Cured'),
+                Text(' ', style: TextStyle(fontSize: 10),),
               ],),
             ],
           ),
+
           Text('last update: $covLastUpdate',style: TextStyle(color: Colors.grey,fontSize: 8),),
           const SizedBox(height: 5,),
         ]

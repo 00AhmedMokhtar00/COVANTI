@@ -36,7 +36,7 @@ class Cases extends StatelessWidget {
           return Center(child: Text('Please enable internet connection to get the statistics',textAlign: TextAlign.center,style: TextStyle(color: Colors.red),));
         }
         // By default, show a loading spinner.
-        return const Center(child: CircularProgressIndicator());
+        return Center(child: CircularProgressIndicator(backgroundColor: Theme.of(context).primaryColor));
       },
     );
   }

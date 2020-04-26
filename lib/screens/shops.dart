@@ -34,7 +34,7 @@ class _ShopsState extends State<Shops> with TickerProviderStateMixin{
           isScrollable: false,
           controller: _tabController,
           labelColor: Colors.white,
-          unselectedLabelColor: Colors.blue,
+          unselectedLabelColor: Theme.of(context).primaryColor,
           indicatorColor: Colors.transparent,
           onTap: (idx) {
             setState(() {
@@ -42,9 +42,9 @@ class _ShopsState extends State<Shops> with TickerProviderStateMixin{
             });
           },
           tabs: [
-            Tab(child: CTab(title: 'All',color: _tabController.index == 0? Colors.blue: Colors.white,)),
-            Tab(child: CTab(title: 'Pharmacies',color: _tabController.index == 1? Colors.blue: Colors.white)),
-            Tab(child: CTab(title: 'Supermarkets',color: _tabController.index == 2? Colors.blue: Colors.white)),
+            Tab(child: CTab(title: 'All',color: _tabController.index == 0? Theme.of(context).primaryColor: Colors.white,)),
+            Tab(child: CTab(title: 'Pharmacies',color: _tabController.index == 1? Theme.of(context).primaryColor: Colors.white)),
+            Tab(child: CTab(title: 'Supermarkets',color: _tabController.index == 2? Theme.of(context).primaryColor: Colors.white)),
           ],
         ),
         Container(

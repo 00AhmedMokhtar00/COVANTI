@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 class NewsItem{
   //final int id;
   final String  title, img, description, url;
-  const NewsItem({@required this.url, @required this.description,@required this.title,this.img = 'assets/images/news.png'});
+  const NewsItem({@required this.url, @required this.description,@required this.title,this.img});
 
   factory NewsItem.fromJson(Map<String, dynamic> json, int idx) {
     return NewsItem(

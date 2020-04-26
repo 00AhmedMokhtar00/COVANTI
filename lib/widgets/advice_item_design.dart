@@ -8,7 +8,7 @@ class AdviceItemDesign extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5.0),
+        margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           boxShadow: [BoxShadow(blurRadius: 4,color: Colors.grey)],
@@ -33,7 +33,7 @@ class AdviceItemDesign extends StatelessWidget {
                   child: Row(
                     children: <Widget>[
                     Expanded(child: Text(advice.title, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),)),
-                    IconButton(icon: Icon(Icons.navigate_next,color: Colors.blue,size: 30,)),
+                    IconButton(icon: Icon(Icons.navigate_next,color: Theme.of(context).primaryColor,size: 30,)),
                     ]
                   ),
                 ),

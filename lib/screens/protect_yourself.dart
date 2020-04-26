@@ -8,7 +8,7 @@ class ProtectYourself extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(iconSize: 30,icon: Icon(Icons.arrow_back_ios),color: Colors.blue,onPressed: (){Navigator.pop(context);},),
+        leading: IconButton(iconSize: 30,icon: Icon(Icons.arrow_back_ios),color: Theme.of(context).primaryColor,onPressed: (){Navigator.pop(context);},),
         title: Text('Protect yourself',style: Theme.of(context).textTheme.body1,),
         elevation: 0,
         backgroundColor: Colors.white,

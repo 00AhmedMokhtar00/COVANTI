@@ -21,7 +21,7 @@ class _AdviceDetailsState extends State<AdviceDetails> {
       setState(() {
         isSpeaking = true;
       });
-      var result = await flutterTts.speak(txt);
+      await flutterTts.speak(txt);
     }else{
       setState(() {
         isSpeaking = false;
@@ -40,7 +40,7 @@ class _AdviceDetailsState extends State<AdviceDetails> {
         elevation: 0,
         leading: CircleAvatar(
         backgroundColor: Colors.white,
-        child: IconButton(color: Colors.blue, icon: Icon(Icons.arrow_back_ios),iconSize: 30,onPressed: (){Navigator.pop(context);},),
+        child: IconButton(color: Theme.of(context).primaryColor, icon: Icon(Icons.arrow_back_ios),iconSize: 30,onPressed: (){Navigator.pop(context);},),
       ),
       ),
       floatingActionButton: FloatingActionButton(
