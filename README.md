@@ -1,16 +1,28 @@
-# solution_challenge
+# CovAnti Mobile Application
 
-Flutter application for showing statistics about COVID19 and guidelines to avoid catching the diseas
+COVANTI is a flutter application provides ultimate guidance for preventing and fighting against respiratory diseases caused by a new strain of coronavirus (officially named COVID-19).
+
+Features:
+
+- Virtual Medical Assistant (Chatbot).
+
+<a href="https://imgflip.com/gif/3ymkpd"><img src="https://i.imgflip.com/3ymkpd.gif" title="chatbot"/><a/>
+  
+- Interactive map shows statistics in every country.
+
+<a href="https://imgflip.com/gif/3ymgs2"><img src="https://i.imgflip.com/3ymgs2.gif" title="Map"/><a/>
+<a href="https://imgflip.com/gif/3ymnp7"><img src="https://i.imgflip.com/3ymnp7.gif" title="Maps2"/><a/>
+  
+- Health news in your country.
+
+<a href="https://imgflip.com/gif/3ymlph"><img src="https://i.imgflip.com/3ymlph.gif" title="News"/><a/>
+
+- Advises on how to avoid the disease.
+
+<a href="https://imgflip.com/gif/3ymor8"><img src="https://i.imgflip.com/3ymor8.gif" title="Advices"/><a/>
+
+- offline data 
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
