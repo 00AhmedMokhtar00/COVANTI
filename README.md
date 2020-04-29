@@ -33,4 +33,13 @@ The information depends on the WHO and the reliable news sources for each countr
 - Advises on how to avoid the disease.
 
 <a href="https://imgflip.com/gif/3ymor8"><img src="https://i.imgflip.com/3ymor8.gif" title="Advices"/><a/>
+  
+- View all the available nearby shops and pharmacies (in develop mode).
+
+<a href="https://imgflip.com/gif/3ymzwg"><img src="https://i.imgflip.com/3ymzwg.gif" title="Shops"/><a/>
+  
+
+- included link to online charitable coronavirus test
+
+<a href="https://imgflip.com/gif/3ymyns"><img src="https://i.imgflip.com/3ymyns.gif" title="Test"/><a/>
 
