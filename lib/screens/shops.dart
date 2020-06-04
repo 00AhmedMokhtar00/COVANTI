@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/title.dart';
-import '../shop_tabs/all.dart';
-import '../shop_tabs/supermarkets.dart';
-import '../shop_tabs/pharmacies.dart';
+import 'shop_tabs/all.dart';
+import 'shop_tabs/supermarkets.dart';
+import 'shop_tabs/pharmacies.dart';
 import '../widgets/ctab.dart';
 
 class Shops extends StatefulWidget {

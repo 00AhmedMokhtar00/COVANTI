@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/shops_list.dart';
-import '../widgets/shop_item_design.dart';
+import '../../models/shops_list.dart';
+import '../../widgets/shop_item_design.dart';
 
 class SuperMarkets extends StatelessWidget {
 
