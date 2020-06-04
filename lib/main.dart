@@ -15,6 +15,10 @@ import 'screens/home_page.dart';
 void main()async{
 
   WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   await Permission.microphone.request().isGranted;
   await Permission.location.request().isGranted;
   runApp(MyApp());
@@ -25,10 +29,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
+
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'COVANTI',
