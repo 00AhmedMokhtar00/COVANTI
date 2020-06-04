@@ -4,6 +4,13 @@ class PrefKeys {
   static const String COUNTRY_CODE = "country_code";
   static const String LOCATION_LATITUDE = "location_latitude";
   static const String LOCATION_LONGITUDE = "location_longitude";
+
+  static const String CASES = "cases";
+  static const String DEATHS = "deaths";
+  static const String RECOVERED = "recovered";
+  static const String TODAY_CASES = "todayCases";
+  static const String TODAY_DEATHS = "todayDeaths";
+  static const String LAST_UPDATE = "lastUpdate";
 }
 
 class PrefDefaultValues{

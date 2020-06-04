@@ -17,6 +17,18 @@ class PrefUtils {
     return (await getSharePref()).setBool(key, data);
   }
 
+  static Future<bool> setInt(String key, int data) async {
+    return (await getSharePref()).setInt(key, data);
+  }
+
+  static Future<int> getInt(String key) async {
+    final res = (await getSharePref()).getInt(key);
+    if(res != null){
+      return res;
+    }
+    return 0;
+  }
+
   static Future<String> getString(String key) async {
     return (await getSharePref()).getString(key);
   }

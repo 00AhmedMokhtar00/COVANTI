@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:solution_challenge/prefs/pref_manager.dart';
+import 'package:solution_challenge/res/assets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/cases.dart';
@@ -26,7 +27,7 @@ class Home extends StatelessWidget {
                 children: <Widget>[
                   CTitle('Home'),
                   FloatingActionButton(
-                    onPressed: _test,
+                    onPressed: () => Links.launchURL(Links.CORONA_TEST),
                     tooltip: 'coronavirus test',
                     backgroundColor: Theme.of(context).primaryColor,
                     child: Icon(Icons.verified_user, color: Colors.white,),
@@ -44,16 +45,6 @@ class Home extends StatelessWidget {
             ],
           ),
     );
-  }
-
-
-  Future<void> _test() async {
-    const url = 'https://covapp.charite.de/questionnaire';
-    if (await canLaunch(url)) {
-    await launch(url);
-    } else {
-    throw 'Could not launch $url';
-    }
   }
 }
 
