@@ -6,6 +6,7 @@ import 'package:flutter_sim_country_code/flutter_sim_country_code.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:solution_challenge/prefs/pref_manager.dart';
 import 'package:solution_challenge/res/asset_paths.dart';
 
 import 'screens/home_page.dart';
@@ -62,32 +63,31 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
 class Splash extends StatefulWidget {
   @override
   _SplashState createState() => _SplashState();
 }
 
 class _SplashState extends State<Splash> {
-  Future locationData;
-  LatLng cur;
-
+  bool isLoading = false;
+  void getData()async{
+    setState(() {isLoading = true;});
+    await PrefManager.initialPref();
+    setState(() {isLoading = false;});
+  }
   @override
   void initState() {
-    locationData = getAllData();
+    getData();
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     final MQH = MediaQuery.of(context).size.height;
     final MQW = MediaQuery.of(context).size.width;
-    return FutureBuilder(
-        future: locationData,
-        builder: (context, snapshot) {
-          if(snapshot.connectionState == ConnectionState.done) {
-            return SafeArea(child: HomePage(snapshot.data[0], snapshot.data[1], cur));
-          }
-          return SafeArea(
+    return !isLoading?SafeArea(child: HomePage())
+          :
+            SafeArea(
             child: Container(
               color: Colors.white,
               width: MQW,
@@ -101,34 +101,6 @@ class _SplashState extends State<Splash> {
               ),
             ),
           );
-        }
-    );
-  }
-
-  getAllData()async{
-    final String country = await FlutterSimCountryCode.simCountryCode;
-    final String jsonString = await _loadAsset();
-    cur = await getCurrentLocation();
-    final body = json.decode(jsonString);
-    int idx;
-
-    for(int i = 0; i < body.length; i++){
-
-      if(body[i]['code'] == country){
-        idx = i;
-        return [body[idx]['name'],body[idx]['code'].toString().toLowerCase()];
-      }
-    }
-    return [body[idx]['name'].toString(),body[idx]['code'].toString().toLowerCase()];
-  }
-  Future<String> _loadAsset() async {
-    return await rootBundle.loadString('assets/countries.json');
-  }
-  Future<LatLng> getCurrentLocation()async{
-    var location = Location();
-    LocationData position = await location.getLocation();
-    final cur = LatLng(position.latitude, position.longitude);
-    return cur;
   }
 }
 

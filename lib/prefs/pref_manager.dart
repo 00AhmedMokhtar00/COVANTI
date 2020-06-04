@@ -13,7 +13,8 @@ class PrefManager {
   static String country_code;
   static LatLng current_location;
 
-  static Future<void> initialPref()async{
+  static Future<bool> initialPref()async{
+    await getUserLocation();
     country = await getCountry();
     country_code = await getCountryCode();
     current_location = LatLng(await getLocationLatitude(), await getLocationLongitude());

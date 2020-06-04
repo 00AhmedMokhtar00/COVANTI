@@ -5,15 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:solution_challenge/prefs/pref_manager.dart';
 import 'cases_builder.dart';
 
 class Cases extends StatelessWidget {
-  final String country;
   String covLastUpdate;
   bool connectionAvailable = true;
   Future offlineData;
 
-  Cases(this.country){offlineData = getData();}
+  Cases(){offlineData = getData();}
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class Cases extends StatelessWidget {
   }
 
   Future<void> fetchCase() async {
-    final response = await http.get('https://corona.lmao.ninja/v2/countries/${country}');
+    final response = await http.get('https://corona.lmao.ninja/v2/countries/${PrefManager.country}');
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
       SharedPreferences prefs = await SharedPreferences.getInstance();

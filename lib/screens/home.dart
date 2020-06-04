@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:solution_challenge/prefs/pref_manager.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/cases.dart';
@@ -12,11 +13,6 @@ import '../widgets/title.dart';
 
 
 class Home extends StatelessWidget {
-
-  Home(this.country, this.cur_location);
-
-  final String country;
-  final LatLng cur_location;
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +34,9 @@ class Home extends StatelessWidget {
                   )
                 ],
               ),
-              HomeMap(cur_location),
-              Country('In $country'),
-              Cases(country),
+              HomeMap(),
+              Country('In ${PrefManager.country}'),
+              Cases(),
               COVIDInfo(),
               const ProtectYourselfButton(),
               COVANTI(),

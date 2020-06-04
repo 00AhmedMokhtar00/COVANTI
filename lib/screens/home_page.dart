@@ -8,28 +8,18 @@ import 'map.dart';
 import 'news.dart';
 
 class HomePage extends StatefulWidget {
-  final String _country, _countryCode;
-  final LatLng cur_location;
-  // ignore: sort_constructors_first
-  HomePage(this._country, this._countryCode, this.cur_location);
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
-  List<Widget> _screens;
-
-  @override
-  void initState() {
-    _screens = [
-      Home(widget._country, widget.cur_location),
-      CMap(widget._country, widget.cur_location),
-      Shops(),
-      News(widget._countryCode)
-    ];
-    super.initState();
-  }
+  List<Widget> _screens = [
+    Home(),
+    CMap(),
+    Shops(),
+    News()
+  ];
 
 
   @override

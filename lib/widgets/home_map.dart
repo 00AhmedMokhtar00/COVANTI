@@ -1,19 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:solution_challenge/prefs/pref_manager.dart';
 
 
 class HomeMap extends StatelessWidget {
 
-  HomeMap(this.cur);
-
-  GoogleMapController mapController;
-  Position position;
-  final LatLng cur;
-
-  void _onMapCreated(GoogleMapController controller) async{
-    mapController = controller;
-  }
 
 
   @override
@@ -29,12 +21,12 @@ class HomeMap extends StatelessWidget {
         onTap: (v){},
         zoomGesturesEnabled: true,
         mapType: MapType.normal,
-        onMapCreated: _onMapCreated,
+        onMapCreated: null,
         initialCameraPosition: CameraPosition(
-          target: cur,
+          target: PrefManager.current_location,
           zoom: 4.0,
         ),
-        markers: {_createMarker(cur)},
+        markers: {_createMarker(PrefManager.current_location)},
       )
     );
   }
@@ -47,23 +39,3 @@ Marker _createMarker(LatLng pos) {
       icon: BitmapDescriptor.defaultMarker,
     );
 }
-
-/*
-String generateLocationPreviewImage({double latitude, double longitude,}) {
-    return 'https://maps.googleapis.com/maps/api/staticmap?center=&$latitude,$longitude&zoom=16&size=600x300&maptype=roadmap&markers=color:red%7Clabel:A%7C$latitude,$longitude&key=$GOOGLE_API_KEY';
-  }
- */
-
-
-/*
-Image.network('https://maps.googleapis.com/maps/api/staticmap?center=${cur.latitude},${cur.longitude}&zoom=10&size=600x300&maptype=roadmap&markers=color:red%7Clabel:A%7C${cur.latitude},${cur.longitude}&key=AIzaSyDScFkj7iFL-Ks9MNWVNrmKjOVrNDbnQo4')
-GoogleMap(
-              mapType: MapType.normal,
-              onMapCreated: _onMapCreated,
-              initialCameraPosition: CameraPosition(
-                target: cur,
-                zoom: 4.0,
-              ),
-              markers: {_createMarker(cur)},
-            )
- */
