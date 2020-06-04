@@ -23,6 +23,7 @@ class PrefManager {
   static String lastUpdate;
 
   static Future<bool> initialPref()async{
+    await fetchNews();
     await getUserLocation();
     await fetchCase();
     country            = await getCountry();
@@ -279,5 +280,33 @@ class PrefManager {
   }
   static Future<int> getTodayGlobalDeaths() async {
     return await PrefUtils.getInt(PrefKeys.TODAY_GLOBAL_DEATHS);
+  }
+
+  static Future<void> fetchNews() async {
+    final response = await http.get(
+        'http://newsapi.org/v2/top-headlines?country=${PrefManager.country_code}&category=health&apiKey=323019aaa9fd463e83cce512b425a1ab');
+    var body = json.decode(response.body);
+
+    if (response.statusCode == 200){
+      for (int idx = 0; idx <= 19; idx++) {
+        await PrefUtils.setString('newsTitle$idx', body['articles'][idx]['title']);
+        await PrefUtils.setString('newsDescription$idx', body['articles'][idx]['description']);
+        await PrefUtils.setString('newsUrl$idx', body['articles'][idx]['url']);
+        await PrefUtils.setString('newsImg$idx', body['articles'][idx]['urlToImage']);
+      }
+    }
+  }
+
+  static Future<Map<String, String>> getOfflineNews() async {
+      Map<String, String> temp = {};
+      for (int idx = 0; idx <= 19; idx++) {
+        temp.addAll({
+          'newsTitle$idx': PrefUtils.getString('newsTitle$idx') ?? ' ',
+          'newsDescription$idx': PrefUtils.getString('newsDescription$idx') ?? ' ',
+          'newsUrl$idx': PrefUtils.getString('newsUrl$idx') ?? ' ',
+          'newsImg$idx': PrefUtils.getString('newsImg$idx') ?? ' ',
+        });
+      }
+      return temp;
   }
 }
