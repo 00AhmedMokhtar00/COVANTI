@@ -7,6 +7,7 @@ import 'package:geocoder/geocoder.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
+import 'package:solution_challenge/res/assets.dart';
 
 import '../prefs/pref_keys.dart';
 import '../prefs/pref_utils.dart';
@@ -122,7 +123,7 @@ class PrefManager {
   }
 
   static Future<void> fetchCase() async {
-    final response = await http.get('https://corona.lmao.ninja/v2/countries/${PrefManager.country}');
+    final response = await http.get('${Links.CORONA_CASES}${PrefManager.country}');
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
       await setCases(body['cases']);
