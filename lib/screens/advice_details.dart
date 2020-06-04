@@ -3,6 +3,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import '../models/advice.dart';
 
 class AdviceDetails extends StatefulWidget {
+  static const String routeName = "AdviceDetails";
   final Advice advice;
 
   AdviceDetails({this.advice});

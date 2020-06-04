@@ -28,7 +28,7 @@ class COVANTI extends StatelessWidget {
                   style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 9.5,fontWeight: FontWeight.bold),)),
               ),
               GestureDetector(
-                  onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (_) => Chatbot()));},
+                  onTap: (){Navigator.pushNamed(context, Chatbot.routeName);},
                   child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 //decoration: BoxDecoration(boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.4),spreadRadius: 1.4, blurRadius: 2)],shape: BoxShape.circle),

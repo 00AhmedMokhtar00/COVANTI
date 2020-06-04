@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:solution_challenge/prefs/pref_manager.dart';
 
 import '../widgets/global_map.dart';
 import '../widgets/cases.dart';
@@ -10,10 +11,6 @@ import '../widgets/title.dart';
 
 class CMap extends StatelessWidget{
 
-  final String country;
-  final LatLng cur_location;
-  CMap(this.country, this.cur_location);
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -21,11 +18,11 @@ class CMap extends StatelessWidget{
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               CTitle('Map'),
-              GlobalMap(cur_location),
+              GlobalMap(),
               Country('Globally'),
               GlobalCases(),
-              Country('In $country'),
-              Cases(country),
+              Country('In ${PrefManager.country}'),
+              Cases(),
               SizedBox(height: 120,)
             ],
           ),

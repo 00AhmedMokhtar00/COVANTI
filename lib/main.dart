@@ -8,6 +8,7 @@ import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:solution_challenge/prefs/pref_manager.dart';
 import 'package:solution_challenge/res/asset_paths.dart';
+import 'package:solution_challenge/screens/chatbot.dart';
 
 import 'screens/home_page.dart';
 
@@ -58,7 +59,10 @@ class MyApp extends StatelessWidget {
             accentColor: Colors.white,
           iconTheme: IconThemeData(color: Colors.white),
         ),
-        home: Splash()
+        home: Splash(),
+      routes: {
+          Chatbot.routeName : (BuildContext _) => Chatbot(),
+      },
     );
   }
 }
@@ -86,8 +90,7 @@ class _SplashState extends State<Splash> {
     final MQH = MediaQuery.of(context).size.height;
     final MQW = MediaQuery.of(context).size.width;
     return !isLoading?SafeArea(child: HomePage())
-          :
-            SafeArea(
+          : SafeArea(
             child: Container(
               color: Colors.white,
               width: MQW,

@@ -7,7 +7,7 @@ import 'shop_tabs/pharmacies.dart';
 import '../widgets/ctab.dart';
 
 class Shops extends StatefulWidget {
-
+  static const String routeName = "Shops";
   @override
   _ShopsState createState() => _ShopsState();
 }

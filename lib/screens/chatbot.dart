@@ -6,6 +6,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:speech_recognition/speech_recognition.dart';
 
 class Chatbot extends StatefulWidget {
+  static const String routeName = "Chatbot";
   Chatbot({
     Key key,
     this.title,

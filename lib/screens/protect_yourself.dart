@@ -4,6 +4,7 @@ import '../screens/advice_details.dart';
 import '../widgets/advice_item_design.dart';
 
 class ProtectYourself extends StatelessWidget {
+  static const String routeName = "ProtectYourself";
   @override
   Widget build(BuildContext context) {
     return Scaffold(

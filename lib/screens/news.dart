@@ -3,16 +3,17 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:solution_challenge/prefs/pref_manager.dart';
 
 import '../models/news_item.dart';
 import '../widgets/news_item_design.dart';
 import '../widgets/title.dart';
 
 class News extends StatelessWidget {
-  final String countryCode;
+  static const String routeName = "News";
   Future<Map<String, String>> offlineData;
 
-  News(this.countryCode) {
+  News() {
     offlineData = getData();
   }
 
@@ -83,7 +84,7 @@ class News extends StatelessWidget {
 
   Future<NewsItem> fetchNews() async {
     final response = await http.get(
-        'http://newsapi.org/v2/top-headlines?country=$countryCode&category=health&apiKey=323019aaa9fd463e83cce512b425a1ab');
+        'http://newsapi.org/v2/top-headlines?country=${PrefManager.country_code}&category=health&apiKey=323019aaa9fd463e83cce512b425a1ab');
     var body = json.decode(response.body);
 
     if (response.statusCode == 200) {

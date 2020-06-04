@@ -9,6 +9,7 @@ import '../widgets/cases_builder.dart';
 import '../models/locations.dart' as locations;
 
 class GlobalActiveMap extends StatefulWidget {
+  static const String routeName = "GlobalActiveMap";
   @override
   _GlobalActiveMapState createState() => _GlobalActiveMapState();
 }
