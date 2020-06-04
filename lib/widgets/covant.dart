@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:solution_challenge/screens/chatbot.dart';
+
+import '../res/asset_paths.dart';
+import '../screens/chatbot.dart';
 
 class COVANTI extends StatelessWidget {
   @override
@@ -10,7 +12,6 @@ class COVANTI extends StatelessWidget {
           return Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-
               Container(
                 margin: const EdgeInsets.only(top: 10),
                 padding: const EdgeInsets.all(10),
@@ -40,7 +41,7 @@ class COVANTI extends StatelessWidget {
                       image: DecorationImage(
                         fit: BoxFit.fill,
                         alignment: Alignment.topCenter,
-                        image: AssetImage("assets/images/cov.png"),
+                        image: AssetImage(AssetPath.COVANTI_IMAGE),
                       ),
                     ),
                   ),
