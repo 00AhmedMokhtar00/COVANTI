@@ -30,4 +30,14 @@ class PrefUtils {
       return false;
     }
   }
+
+  static Future<double> getDouble(String key) async {
+    var result = (await getSharePref()).getDouble(key);
+    if (result != null) {
+      return result;
+    }
+    else {
+      return 0.0;
+    }
+  }
 }

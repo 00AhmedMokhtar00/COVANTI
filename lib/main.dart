@@ -6,6 +6,7 @@ import 'package:flutter_sim_country_code/flutter_sim_country_code.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:solution_challenge/res/asset_paths.dart';
 
 import 'screens/home_page.dart';
 
@@ -94,7 +95,7 @@ class _SplashState extends State<Splash> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Image.asset('assets/images/splash.png', fit: BoxFit.cover, width: MQW * 0.8,),
+                  Image.asset(AssetPath.SPLASH_IMAGE, fit: BoxFit.cover, width: MQW * 0.8,),
                   CircularProgressIndicator(backgroundColor: Theme.of(context).primaryColor)
                 ],
               ),
