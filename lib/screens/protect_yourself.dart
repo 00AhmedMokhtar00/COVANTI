@@ -16,7 +16,7 @@ class ProtectYourself extends StatelessWidget {
       ),
       body: ListView.builder(itemBuilder: (_, index){
           return InkWell(
-            onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (_)=> AdviceDetails(advice: adviceList[index])));},
+            onTap: (){Navigator.pushNamed(context, AdviceDetails.routeName);},
               child: AdviceItemDesign(advice: adviceList[index],)
           );
       },

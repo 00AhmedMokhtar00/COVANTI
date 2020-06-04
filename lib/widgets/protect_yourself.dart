@@ -8,7 +8,7 @@ class ProtectYourselfButton extends StatelessWidget {
     final MQ = MediaQuery.of(context).size;
     return InkWell(
       borderRadius: BorderRadius.circular(30),
-      onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (_) => ProtectYourself()));},
+      onTap: (){Navigator.pushNamed(context, ProtectYourself.routeName);},
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 5.0),
         width: MQ.width,

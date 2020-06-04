@@ -8,7 +8,10 @@ import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:solution_challenge/prefs/pref_manager.dart';
 import 'package:solution_challenge/res/asset_paths.dart';
+import 'package:solution_challenge/screens/advice_details.dart';
 import 'package:solution_challenge/screens/chatbot.dart';
+import 'package:solution_challenge/screens/global_active_map.dart';
+import 'package:solution_challenge/screens/protect_yourself.dart';
 
 import 'screens/home_page.dart';
 
@@ -62,6 +65,10 @@ class MyApp extends StatelessWidget {
         home: Splash(),
       routes: {
           Chatbot.routeName : (BuildContext _) => Chatbot(),
+          GlobalActiveMap.routeName : (BuildContext _) => GlobalActiveMap(),
+          ProtectYourself.routeName: (BuildContext _) => ProtectYourself(),
+          AdviceDetails.routeName: (BuildContext _) => AdviceDetails(),
+
       },
     );
   }

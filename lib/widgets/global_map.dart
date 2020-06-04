@@ -18,7 +18,7 @@ class GlobalMap extends StatelessWidget {
         ),
         child: GoogleMap(
                   zoomGesturesEnabled: true,
-                  onTap: (_){Navigator.of(context).push(MaterialPageRoute(builder: (_)=> GlobalActiveMap()));},
+                  onTap: (_){Navigator.pushNamed(context, GlobalActiveMap.routeName);},
                   mapType: MapType.normal,
                   initialCameraPosition: CameraPosition(
                     target: PrefManager.current_location,
