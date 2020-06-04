@@ -11,6 +11,12 @@ class PrefKeys {
   static const String TODAY_CASES = "todayCases";
   static const String TODAY_DEATHS = "todayDeaths";
   static const String LAST_UPDATE = "lastUpdate";
+
+  static const String GLOBAL_CASES = "globalCases";
+  static const String GLOBAL_DEATHS = "globalDeaths";
+  static const String GLOBAL_RECOVERED = "globalRecovered";
+  static const String TODAY_GLOBAL_CASES = "todayGlobalCases";
+  static const String TODAY_GLOBAL_DEATHS = "todayGlobalDeaths";
 }
 
 class PrefDefaultValues{

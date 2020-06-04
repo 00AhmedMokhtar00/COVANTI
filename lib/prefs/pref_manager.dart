@@ -18,20 +18,27 @@ class PrefManager {
   static LatLng current_location;
   static int cases, deaths, recovered;
   static int todayCases, todayDeaths;
+  static int globalCases, globalDeaths, globalRecovered;
+  static int todayGlobalCases, todayGlobalDeaths;
   static String lastUpdate;
 
   static Future<bool> initialPref()async{
     await getUserLocation();
     await fetchCase();
-    country = await getCountry();
-    country_code = await getCountryCode();
-    current_location = LatLng(await getLocationLatitude(), await getLocationLongitude());
-    cases = await getCases();
-    deaths = await getDeaths();
-    recovered = await getRecovered();
-    todayCases = await getTodayCases();
-    todayDeaths = await getTodayDeaths();
-    lastUpdate = await getLastUpdate();
+    country            = await getCountry();
+    country_code       = await getCountryCode();
+    current_location   = LatLng(await getLocationLatitude(), await getLocationLongitude());
+    cases              = await getCases();
+    deaths             = await getDeaths();
+    recovered          = await getRecovered();
+    todayCases         = await getTodayCases();
+    todayDeaths        = await getTodayDeaths();
+    globalCases        = await getGlobalCases();
+    globalDeaths       = await getGlobalDeaths();
+    globalRecovered    = await getGlobalRecovered();
+    todayGlobalCases   = await getTodayGlobalCases();
+    todayGlobalDeaths  = await getTodayGlobalDeaths();
+    lastUpdate         = await getLastUpdate();
   }
 
   static Future<String> getCountry() async {
@@ -200,5 +207,77 @@ class PrefManager {
   }
   static Future<String> getLastUpdate() async {
     return await PrefUtils.getString(PrefKeys.LAST_UPDATE)??"unknown";
+  }
+
+  static Future<void> fetchGlobalCase() async {
+    final response = await http.get(Links.CORONA_GLOBAL_CASES);
+    var body = json.decode(response.body);
+    if (response.statusCode == 200) {
+      await setGlobalCases(body['cases']);
+      await setGlobalDeaths(body['deaths']);
+      await setGlobalRecovered(body['recovered']);
+      await setTodayGlobalCases(body['todayCases']);
+      await setTodayGlobalDeaths(body['todayDeaths']);
+      await setLastUpdate(DateFormat.yMMMd().format(DateTime.now())+ ' '+DateFormat.Hm().format(DateTime.now()));
+    } else {
+      print('exception');
+      throw Exception('Failed to load cases');
+    }
+  }
+
+
+  static Future<void> setGlobalCases(int val) async {
+    if(val == null){
+      await PrefUtils.setInt(PrefKeys.GLOBAL_CASES, 0);
+    }else{
+      await PrefUtils.setInt(PrefKeys.GLOBAL_CASES, val);
+    }
+  }
+  static Future<int> getGlobalCases() async {
+    return await PrefUtils.getInt(PrefKeys.GLOBAL_CASES);
+  }
+
+  static Future<void> setGlobalDeaths(int val) async {
+    if(val == null){
+      await PrefUtils.setInt(PrefKeys.GLOBAL_DEATHS, 0);
+    }else{
+      await PrefUtils.setInt(PrefKeys.GLOBAL_DEATHS, val);
+    }
+  }
+  static Future<int> getGlobalDeaths() async {
+    return await PrefUtils.getInt(PrefKeys.GLOBAL_DEATHS);
+  }
+
+  static Future<void> setGlobalRecovered(int val) async {
+    if(val == null){
+      await PrefUtils.setInt(PrefKeys.GLOBAL_RECOVERED, 0);
+    }else{
+      await PrefUtils.setInt(PrefKeys.GLOBAL_RECOVERED, val);
+    }
+  }
+  static Future<int> getGlobalRecovered() async {
+    return await PrefUtils.getInt(PrefKeys.GLOBAL_RECOVERED);
+  }
+
+  static Future<void> setTodayGlobalCases(int val) async {
+    if(val == null){
+      await PrefUtils.setInt(PrefKeys.TODAY_GLOBAL_CASES, 0);
+    }else if(val > 0){
+      await PrefUtils.setInt(PrefKeys.TODAY_GLOBAL_CASES, val);
+    }
+  }
+  static Future<int> getTodayGlobalCases() async {
+    return await PrefUtils.getInt(PrefKeys.TODAY_GLOBAL_CASES);
+  }
+
+  static Future<void> setTodayGlobalDeaths(int val) async {
+    if(val == null){
+      await PrefUtils.setInt(PrefKeys.TODAY_GLOBAL_DEATHS, 0);
+    }else if(val > 0){
+      await PrefUtils.setInt(PrefKeys.TODAY_GLOBAL_DEATHS, val);
+    }
+  }
+  static Future<int> getTodayGlobalDeaths() async {
+    return await PrefUtils.getInt(PrefKeys.TODAY_GLOBAL_DEATHS);
   }
 }

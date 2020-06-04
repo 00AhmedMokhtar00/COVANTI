@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:solution_challenge/prefs/pref_manager.dart';
-import 'package:solution_challenge/res/assets.dart';
-import 'package:url_launcher/url_launcher.dart';
 
+import '../prefs/pref_manager.dart';
+import '../res/assets.dart';
 import '../widgets/cases.dart';
 import '../widgets/country.dart';
 import '../widgets/covant.dart';
