@@ -2,4 +2,5 @@
 
 class AssetPath{
   static const String SPLASH_IMAGE = "assets/images/splash.png";
+  static const String COVID_IMAGE = "assets/images/covid.png";
 }

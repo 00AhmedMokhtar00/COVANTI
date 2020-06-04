@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+
+import '../res/assets.dart';
 
 
 class COVIDInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //const String COVID = '(COVID-19) is an infectious diseas caused by the servere acute respiratory syndrome coronavirus 2 (SARS-CoV-2).The diseas has spread globally since ...';
     return GestureDetector(
-      onTap: _launchURL,
+      onTap: () => Links.launchURL(Links.COVID_INFO),
       child: Container(
           margin: EdgeInsets.symmetric(vertical: 6.0, horizontal: 5.0),
           decoration: BoxDecoration(
@@ -28,7 +28,7 @@ class COVIDInfo extends StatelessWidget {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         fit: BoxFit.fill,
-                        image: AssetImage("assets/images/covid.png"),
+                        image: AssetImage(AssetPath.COVID_IMAGE),
                       ),
                     ),
                   ),
@@ -40,15 +40,6 @@ class COVIDInfo extends StatelessWidget {
           )
       ),
     );
-  }
-
-  _launchURL() async {
-    const url = 'https://www.cdc.gov/coronavirus/2019-ncov/faq.html';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
   }
 
 }
