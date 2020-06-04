@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
+import '../res/assets.dart';
 
 part 'locations.g.dart';
 
@@ -59,16 +60,14 @@ class Locations {
 }
 
 Future<Locations> getAllCountries() async {
-  const LocationsURL = 'https://corona.lmao.ninja/v2/countries';
 
-  // Retrieve the locations of Google offices
-  final response = await http.get(LocationsURL);
+  final response = await http.get(Links.CORONA_CASES);
   if (response.statusCode == 200) {
     return Locations.fromJson(json.decode(response.body));
   } else {
     throw HttpException(
         'Unexpected status code ${response.statusCode}:'
             ' ${response.reasonPhrase}',
-        uri: Uri.parse(LocationsURL));
+        uri: Uri.parse(Links.CORONA_CASES));
   }
 }

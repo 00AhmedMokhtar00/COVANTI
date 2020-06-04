@@ -1,10 +1,9 @@
 import 'dart:core';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:intl/intl.dart';
 
+import '../prefs/pref_manager.dart';
 import '../widgets/cases_builder.dart';
 import '../models/locations.dart' as locations;
 
@@ -113,7 +112,9 @@ class _GlobalActiveMapState extends State<GlobalActiveMap> {
                       int.parse(country.recovered),
                       int.parse(country.todayCases),
                       int.parse(country.todayDeaths),
-                      DateFormat.yMMMd().format(DateTime.now()) + ' ' + DateFormat.Hm().format(DateTime.now())));
+                      PrefManager.lastUpdate
+                  )
+              );
             });
           },
           markerId: MarkerId(country.name),

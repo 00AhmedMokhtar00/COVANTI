@@ -130,7 +130,7 @@ class PrefManager {
   }
 
   static Future<void> fetchCase() async {
-    final response = await http.get('${Links.CORONA_CASES}${PrefManager.country}');
+    final response = await http.get('${Links.CORONA_CASES}/${PrefManager.country}');
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
       await setCases(body['cases']);
