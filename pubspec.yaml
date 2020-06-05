@@ -32,6 +32,11 @@ dependencies:
       ref: master
   flutter_tts: ^0.9.1
   permission_handler: ^5.0.0+hotfix.3
+  flutter_launcher_icons: ^0.7.5
+flutter_icons:
+  android: "ic_launcher"
+  ios: true
+  image_path: "assets/ic_launcher.png"
 
 dev_dependencies:
   pedantic: ^1.4.0

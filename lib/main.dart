@@ -1,10 +1,10 @@
 import 'dart:convert';
 
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart';
+
 import 'package:solution_challenge/prefs/pref_manager.dart';
 import 'package:solution_challenge/res/asset_paths.dart';
 import 'package:solution_challenge/screens/advice_details.dart';
@@ -25,7 +25,7 @@ void main()async{
     DeviceOrientation.portraitDown,
   ]);
   await Permission.microphone.request().isGranted;
-  await Permission.location.request().isGranted;
+  //await Permission.location.request().isGranted;
   runApp(MyApp());
 }
 
@@ -89,6 +89,11 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     getData();
+    Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      if(result == ConnectivityResult.mobile || result == ConnectivityResult.wifi){
+        getData();
+      }
+    });
     super.initState();
   }
   @override

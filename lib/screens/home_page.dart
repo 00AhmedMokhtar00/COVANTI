@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
       body: Stack(
         children: <Widget>[
-          Container(height: MQH,width: MQW,margin: const EdgeInsets.only(left: 10, right: 10, top: 30),child: _screens[_currentIndex]),
+          Container(height: MQH,width: MQW,margin: const EdgeInsets.only(left: 10, right: 10),child: _screens[_currentIndex]),
           Align(
             alignment: Alignment.bottomCenter,
             child: CButtomNavigationBar(onSelect: onTabTapped, index: _currentIndex),
