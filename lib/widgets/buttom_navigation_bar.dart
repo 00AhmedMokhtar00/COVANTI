@@ -39,10 +39,10 @@ class CButtomNavigationBar extends StatelessWidget {
               icon: Icon(MdiIcons.compassOutline,),
               title: Text('Maps'),
             ),
-            const BottomNavigationBarItem(
-              icon: Icon(MdiIcons.cartOutline,),
-              title: Text('Shops'),
-            ),
+//            const BottomNavigationBarItem(
+//              icon: Icon(MdiIcons.cartOutline,),
+//              title: Text('Shops'),
+//            ),
             const BottomNavigationBarItem(
                 icon: Icon(MdiIcons.textBoxMultipleOutline,),
                 title: Text('News')

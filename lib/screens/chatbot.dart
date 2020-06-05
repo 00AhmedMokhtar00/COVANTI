@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:solution_challenge/res/asset_paths.dart';
 import 'package:speech_recognition/speech_recognition.dart';
 
 class Chatbot extends StatefulWidget {
@@ -188,6 +189,7 @@ class _HomePageDialogflowV2 extends State<Chatbot> {
 
   @override
   void dispose() {
+    _textController.dispose();
     flutterTts.stop();
     super.dispose();
   }
@@ -210,7 +212,7 @@ class ChatMessage extends StatelessWidget {
         margin: const EdgeInsets.only(right: 16.0),
         child: CircleAvatar(
           backgroundColor: Colors.grey.withOpacity(0.2),
-          backgroundImage: AssetImage("assets/images/cov.png"),
+          backgroundImage: AssetImage(AssetPath.COVANTI_IMAGE),
           maxRadius: 20,
         ),
       ),
@@ -274,7 +276,7 @@ class ChatMessage extends StatelessWidget {
         ]),
         child: CircleAvatar(
           backgroundColor: Colors.white,
-          child: Image.asset("assets/images/doc.png",
+          child: Image.asset(AssetPath.DOC_IMAGE,
               color: Theme.of(context).primaryColor),
         ),
       ),

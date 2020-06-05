@@ -370,15 +370,25 @@ class PrefManager {
   }
 
   static Future<Map<String, String>> getOfflineNews() async {
+      int hasData = 19;
       Map<String, String> temp = {};
+      String title, description, url, img;
+
       for (int idx = 0; idx <= 19; idx++) {
+        title =       await PrefUtils.getString('newsTitle$idx') ?? ' ';
+        description = await PrefUtils.getString('newsDescription$idx') ?? ' ';
+        url =         await PrefUtils.getString('newsUrl$idx') ?? ' ';
+        img =         await PrefUtils.getString('newsImg$idx') ?? ' ';
+        if(title == ' ' && description == ' ' && url == ' ' && img == ' '){
+          hasData--;
+        }
         temp.addAll({
-          'newsTitle$idx': await PrefUtils.getString('newsTitle$idx') ?? ' ',
-          'newsDescription$idx': await PrefUtils.getString('newsDescription$idx') ?? ' ',
-          'newsUrl$idx': await PrefUtils.getString('newsUrl$idx') ?? ' ',
-          'newsImg$idx': await PrefUtils.getString('newsImg$idx') ?? ' ',
+          'newsTitle$idx':       title,
+          'newsDescription$idx': description,
+          'newsUrl$idx':         url,
+          'newsImg$idx':         img,
         });
       }
-      return temp;
+      return hasData > 10?temp:null;
   }
 }

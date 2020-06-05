@@ -2,13 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../prefs/pref_manager.dart';
 import '../res/assets.dart';
-import '../widgets/cases.dart';
-import '../widgets/country.dart';
-import '../widgets/covant.dart';
-import '../widgets/covid_info.dart';
-import '../widgets/home_map.dart';
-import '../widgets/protect_yourself.dart';
-import '../widgets/title.dart';
+import '../widgets/widgets.dart';
+
 
 
 class Home extends StatelessWidget {

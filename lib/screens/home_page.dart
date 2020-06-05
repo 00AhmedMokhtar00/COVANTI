@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../screens/shops.dart';
 import '../widgets/buttom_navigation_bar.dart';
 import 'home.dart';
 import 'map.dart';
@@ -17,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _screens = [
     Home(),
     CMap(),
-    Shops(),
+    //Shops(),
     News()
   ];
 
