@@ -24,12 +24,18 @@ class Home extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   CTitle('Home'),
-                  FloatingActionButton(
+                  MaterialButton(
                     onPressed: () => Links.launchURL(Links.CORONA_TEST),
-                    tooltip: 'coronavirus test',
-                    backgroundColor: Theme.of(context).primaryColor,
-                    child: Icon(Icons.verified_user, color: Colors.white,),
-                    mini: true,
+                    color: Theme.of(context).primaryColor,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                    elevation: 5.0,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Icon(Icons.verified_user, color: Colors.white,),
+                        Text(' corona test', textAlign: TextAlign.end, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)
+                      ],
+                    ),
                   )
                 ],
               ),

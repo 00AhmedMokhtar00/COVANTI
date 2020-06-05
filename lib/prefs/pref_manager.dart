@@ -25,22 +25,62 @@ class PrefManager {
   static Future<bool> initialPref()async{
 
     if(!await getUserLocation()){
+      print('1');
       country            = await getCountry();
       country_code       = await getCountryCode();
       current_location   = LatLng(await getLocationLatitude(), await getLocationLongitude());
     }
-      cases              = await getCases();
-      deaths             = await getDeaths();
-      recovered          = await getRecovered();
-      todayCases         = await getTodayCases();
-      todayDeaths        = await getTodayDeaths();
-      lastUpdate         = await getLastUpdate();
-      globalCases        = await getGlobalCases();
-      globalDeaths       = await getGlobalDeaths();
-      globalRecovered    = await getGlobalRecovered();
-      todayGlobalCases   = await getTodayGlobalCases();
-      todayGlobalDeaths  = await getTodayGlobalDeaths();
+    print('2');
+    await fetchCase();
+    print('3');
+    await fetchGlobalCase();
+    print('4');
+    cases              = await getCases();
+    deaths             = await getDeaths();
+    recovered          = await getRecovered();
+    todayCases         = await getTodayCases();
+    todayDeaths        = await getTodayDeaths();
+    lastUpdate         = await getLastUpdate();
+    globalCases        = await getGlobalCases();
+    globalDeaths       = await getGlobalDeaths();
+    globalRecovered    = await getGlobalRecovered();
+    todayGlobalCases   = await getTodayGlobalCases();
+    todayGlobalDeaths  = await getTodayGlobalDeaths();
+    print('5');
     await fetchNews();
+    print('6');
+  }
+
+  static Future<void> setCountry(String val) async {
+    if(val == null){
+      await PrefUtils.setString(PrefKeys.COUNTRY, PrefDefaultValues.NO_COUNTRY);
+    }else{
+      await PrefUtils.setString(PrefKeys.COUNTRY, val);
+    }
+  }
+
+  static Future<void> setCountryCode(String val) async {
+    if(val == null){
+      await PrefUtils.setString(PrefKeys.COUNTRY_CODE, PrefDefaultValues.NO_COUNTRY_CODE);
+    }else{
+      await PrefUtils.setString(PrefKeys.COUNTRY_CODE, val);
+    }
+  }
+
+  static Future<void> setLocationLatitude(double val) async {
+    if(val == null){
+      await PrefUtils.setDouble(PrefKeys.LOCATION_LATITUDE, PrefDefaultValues.NO_LOCATION_LATITUDE);
+    }else{
+      await PrefUtils.setDouble(PrefKeys.LOCATION_LATITUDE, val);
+    }
+  }
+
+  static Future<void> setLocationLongitude(double val) async {
+    if(val == null){
+      await PrefUtils.setDouble(PrefKeys.LOCATION_LONGITUDE, PrefDefaultValues.NO_LOCATION_LONGITUDE);
+    }else{
+      await PrefUtils.setDouble(PrefKeys.LOCATION_LONGITUDE, val);
+    }
   }
 
   static Future<String> getCountry() async {
@@ -85,6 +125,8 @@ class PrefManager {
       if(await checkInternetConnectivity()) {
         myLocation = await location.getLocation();
         current_location = LatLng(myLocation.latitude, myLocation.longitude);
+        setLocationLatitude(myLocation.latitude);
+        setLocationLongitude(myLocation.longitude);
       }else{
         return false;
       }
@@ -115,6 +157,8 @@ class PrefManager {
       return false;
     }
     var first = addresses.first;
+    setCountry(first.countryName);
+    setCountryCode(first.countryCode);
     country = first.countryName;
     country_code = first.countryCode;
     print('${first.countryCode}%20${first.countryName},');
@@ -132,7 +176,14 @@ class PrefManager {
   }
 
   static Future<bool> fetchCase() async {
-    final response = await http.get('${Links.CORONA_CASES}/${PrefManager.country}');
+    var response;
+    try {
+      response = await http.get(
+          '${Links.CORONA_CASES}/${PrefManager.country}');
+    }catch(e){
+      print("MOKHOTAAAR" + e.toString());
+      return false;
+    }
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
       await setCases(body['cases']);
@@ -216,7 +267,13 @@ class PrefManager {
   }
 
   static Future<bool> fetchGlobalCase() async {
-    final response = await http.get(Links.CORONA_GLOBAL_CASES);
+    var response;
+    try {
+      response = await http.get(Links.CORONA_GLOBAL_CASES);
+    }catch(e){
+      print("MOKHOOOO" + e.toString());
+      return false;
+    }
     var body = json.decode(response.body);
     if (response.statusCode == 200) {
       await setGlobalCases(body['cases']);
@@ -288,9 +345,16 @@ class PrefManager {
     return await PrefUtils.getInt(PrefKeys.TODAY_GLOBAL_DEATHS);
   }
 
-  static Future<void> fetchNews() async {
-    final response = await http.get(
-        'http://newsapi.org/v2/top-headlines?country=${PrefManager.country_code}&category=health&apiKey=323019aaa9fd463e83cce512b425a1ab');
+  static Future<bool> fetchNews() async {
+    var response;
+    try {
+      response = await http.get(
+          'http://newsapi.org/v2/top-headlines?country=${PrefManager
+              .country_code}&category=health&apiKey=323019aaa9fd463e83cce512b425a1ab');
+    }catch(e){
+      print("NEWS" + e.toString());
+      return false;
+    }
     var body = json.decode(response.body);
 
     if (response.statusCode == 200){
@@ -300,7 +364,9 @@ class PrefManager {
         await PrefUtils.setString('newsUrl$idx', body['articles'][idx]['url']);
         await PrefUtils.setString('newsImg$idx', body['articles'][idx]['urlToImage']);
       }
+      return true;
     }
+    return false;
   }
 
   static Future<Map<String, String>> getOfflineNews() async {

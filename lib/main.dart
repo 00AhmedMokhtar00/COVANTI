@@ -1,20 +1,15 @@
-import 'dart:convert';
-
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import 'package:solution_challenge/prefs/pref_manager.dart';
-import 'package:solution_challenge/res/asset_paths.dart';
-import 'package:solution_challenge/screens/advice_details.dart';
-import 'package:solution_challenge/screens/chatbot.dart';
-import 'package:solution_challenge/screens/global_active_map.dart';
-import 'package:solution_challenge/screens/protect_yourself.dart';
-
+import 'prefs/pref_manager.dart';
+import 'res/asset_paths.dart';
+import 'screens/advice_details.dart';
+import 'screens/chatbot.dart';
+import 'screens/global_active_map.dart';
+import 'screens/protect_yourself.dart';
 import 'screens/home_page.dart';
-
-
 
 
 void main()async{

@@ -52,4 +52,8 @@ class PrefUtils {
       return 0.0;
     }
   }
+
+  static Future<bool> setDouble(String key, double data) async {
+    return (await getSharePref()).setDouble(key, data);
+  }
 }
