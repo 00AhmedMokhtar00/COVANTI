@@ -4,7 +4,6 @@ import '../models/advice.dart';
 class AdviceItemDesign extends StatelessWidget {
   final Advice advice;
   AdviceItemDesign({this.advice});
-
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -1,4 +1,4 @@
-package com.mokhtar.ccs.solution_challenge
+package com.mokhtar.covanti
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

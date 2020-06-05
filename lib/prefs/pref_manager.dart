@@ -23,23 +23,24 @@ class PrefManager {
   static String lastUpdate;
 
   static Future<bool> initialPref()async{
+
+    if(!await getUserLocation()){
+      country            = await getCountry();
+      country_code       = await getCountryCode();
+      current_location   = LatLng(await getLocationLatitude(), await getLocationLongitude());
+    }
+      cases              = await getCases();
+      deaths             = await getDeaths();
+      recovered          = await getRecovered();
+      todayCases         = await getTodayCases();
+      todayDeaths        = await getTodayDeaths();
+      lastUpdate         = await getLastUpdate();
+      globalCases        = await getGlobalCases();
+      globalDeaths       = await getGlobalDeaths();
+      globalRecovered    = await getGlobalRecovered();
+      todayGlobalCases   = await getTodayGlobalCases();
+      todayGlobalDeaths  = await getTodayGlobalDeaths();
     await fetchNews();
-    await getUserLocation();
-    await fetchCase();
-    country            = await getCountry();
-    country_code       = await getCountryCode();
-    current_location   = LatLng(await getLocationLatitude(), await getLocationLongitude());
-    cases              = await getCases();
-    deaths             = await getDeaths();
-    recovered          = await getRecovered();
-    todayCases         = await getTodayCases();
-    todayDeaths        = await getTodayDeaths();
-    globalCases        = await getGlobalCases();
-    globalDeaths       = await getGlobalDeaths();
-    globalRecovered    = await getGlobalRecovered();
-    todayGlobalCases   = await getTodayGlobalCases();
-    todayGlobalDeaths  = await getTodayGlobalDeaths();
-    lastUpdate         = await getLastUpdate();
   }
 
   static Future<String> getCountry() async {
@@ -130,7 +131,7 @@ class PrefManager {
     }
   }
 
-  static Future<void> fetchCase() async {
+  static Future<bool> fetchCase() async {
     final response = await http.get('${Links.CORONA_CASES}/${PrefManager.country}');
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
@@ -140,8 +141,12 @@ class PrefManager {
       await setTodayCases(body['todayCases']);
       await setTodayDeaths(body['todayDeaths']);
       await setLastUpdate(DateFormat.yMMMd().format(DateTime.now()) + ' ' + DateFormat.Hm().format(DateTime.now()));
+      return true;
     }
-    else{print('ERROR!!');}
+    else{
+      print('ERROR!!');
+      return false;
+    }
   }
 
   static Future<void> setCases(int val) async {
@@ -210,7 +215,7 @@ class PrefManager {
     return await PrefUtils.getString(PrefKeys.LAST_UPDATE)??"unknown";
   }
 
-  static Future<void> fetchGlobalCase() async {
+  static Future<bool> fetchGlobalCase() async {
     final response = await http.get(Links.CORONA_GLOBAL_CASES);
     var body = json.decode(response.body);
     if (response.statusCode == 200) {
@@ -220,9 +225,10 @@ class PrefManager {
       await setTodayGlobalCases(body['todayCases']);
       await setTodayGlobalDeaths(body['todayDeaths']);
       await setLastUpdate(DateFormat.yMMMd().format(DateTime.now())+ ' '+DateFormat.Hm().format(DateTime.now()));
+      return true;
     } else {
       print('exception');
-      throw Exception('Failed to load cases');
+      return false;
     }
   }
 
@@ -301,10 +307,10 @@ class PrefManager {
       Map<String, String> temp = {};
       for (int idx = 0; idx <= 19; idx++) {
         temp.addAll({
-          'newsTitle$idx': PrefUtils.getString('newsTitle$idx') ?? ' ',
-          'newsDescription$idx': PrefUtils.getString('newsDescription$idx') ?? ' ',
-          'newsUrl$idx': PrefUtils.getString('newsUrl$idx') ?? ' ',
-          'newsImg$idx': PrefUtils.getString('newsImg$idx') ?? ' ',
+          'newsTitle$idx': await PrefUtils.getString('newsTitle$idx') ?? ' ',
+          'newsDescription$idx': await PrefUtils.getString('newsDescription$idx') ?? ' ',
+          'newsUrl$idx': await PrefUtils.getString('newsUrl$idx') ?? ' ',
+          'newsImg$idx': await PrefUtils.getString('newsImg$idx') ?? ' ',
         });
       }
       return temp;

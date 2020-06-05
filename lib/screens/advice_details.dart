@@ -4,10 +4,6 @@ import '../models/advice.dart';
 
 class AdviceDetails extends StatefulWidget {
   static const String routeName = "AdviceDetails";
-  final Advice advice;
-
-  AdviceDetails({this.advice});
-
   @override
   _AdviceDetailsState createState() => _AdviceDetailsState();
 }
@@ -33,7 +29,7 @@ class _AdviceDetailsState extends State<AdviceDetails> {
 
   @override
   Widget build(BuildContext context) {
-    //final MQ = MediaQuery.of(context).size.width;
+    final args = ModalRoute.of(context).settings.arguments as Advice;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -47,7 +43,7 @@ class _AdviceDetailsState extends State<AdviceDetails> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
         child: Icon(Icons.volume_up, color: Colors.white.withOpacity(0.9),size: 30,),
-        onPressed: ()=> _speak(widget.advice.description.toString()),
+        onPressed: ()=> _speak(args.description.toString()),
       ),
       body: LayoutBuilder(
         builder: (_, constrains){
@@ -55,7 +51,7 @@ class _AdviceDetailsState extends State<AdviceDetails> {
 
             children: <Widget>[
               SizedBox(height: 10,),
-              Center(child: Text(widget.advice.title, style: Theme.of(context).textTheme.body1,)),
+              Center(child: Text(args.title, style: Theme.of(context).textTheme.body1,)),
               SizedBox(height: 15,),
               Container(
                 margin: const EdgeInsets.only(left: 4, top: 4, bottom: 4),
@@ -64,7 +60,7 @@ class _AdviceDetailsState extends State<AdviceDetails> {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.fill,
-                    image: AssetImage(widget.advice.img),
+                    image: AssetImage(args.img),
                   ),
                 ),
               ),
@@ -81,12 +77,12 @@ class _AdviceDetailsState extends State<AdviceDetails> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Container(margin: const EdgeInsets.only(left: 5, right: 5, top: 8),child: Icon(Icons.brightness_1, color: Theme.of(context).primaryColor, size: 10,)),
-                            Expanded(child: Text(widget.advice.description[i], style: TextStyle(fontSize: 14),)),
+                            Expanded(child: Text(args.description[i], style: TextStyle(fontSize: 14),)),
                           ],
                         ),
                       );
                     },
-                    itemCount: widget.advice.description.length,
+                    itemCount: args.description.length,
                   ),
                 ),
               ),
