@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CTab extends StatelessWidget {
+  CTab({this.title, this.color = Colors.white});
   final String title;
   final Color color;
-  CTab({this.title, this.color = Colors.white});
 
   @override
   Widget build(BuildContext context) {

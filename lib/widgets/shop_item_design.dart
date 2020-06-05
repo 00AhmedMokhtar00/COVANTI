@@ -1,10 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import '../models/shop_item.dart';
 
 class ShopItemDesign extends StatelessWidget {
-  final ShopItem shopItem;
   ShopItemDesign({@required this.shopItem});
+  final ShopItem shopItem;
 
   @override
   Widget build(BuildContext context) {

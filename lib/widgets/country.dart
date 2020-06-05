@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Country extends StatelessWidget {
+  const Country(this.country);
   final String country;
 
-  const Country(this.country);
 
   @override
   Widget build(BuildContext context) {

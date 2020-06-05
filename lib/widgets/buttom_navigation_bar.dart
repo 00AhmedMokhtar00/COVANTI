@@ -3,9 +3,9 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 
 class CButtomNavigationBar extends StatelessWidget {
+  CButtomNavigationBar({this.onSelect, this.index});
   final Function onSelect;
   final int index;
-  CButtomNavigationBar({this.onSelect, this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +54,3 @@ class CButtomNavigationBar extends StatelessWidget {
   }
 }
 
-/*
-*
-*
-*
-*
-* */

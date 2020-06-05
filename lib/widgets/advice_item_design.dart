@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../models/advice.dart';
 
 class AdviceItemDesign extends StatelessWidget {
-  final Advice advice;
   AdviceItemDesign({this.advice});
+  final Advice advice;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,7 +32,7 @@ class AdviceItemDesign extends StatelessWidget {
                   child: Row(
                     children: <Widget>[
                     Expanded(child: Text(advice.title, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),)),
-                    IconButton(icon: Icon(Icons.navigate_next,color: Theme.of(context).primaryColor,size: 30,)),
+                    Icon(Icons.navigate_next,color: Theme.of(context).primaryColor,size: 30),
                     ]
                   ),
                 ),

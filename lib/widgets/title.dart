@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 
 
 class CTitle extends StatelessWidget {
-  final String title;
-
   CTitle(this.title);
+  final String title;
 
   @override
   Widget build(BuildContext context) {

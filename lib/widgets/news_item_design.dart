@@ -1,13 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:solution_challenge/res/assets.dart';
+
 import '../models/news_item.dart';
 
 
 class NewsItemDesign extends StatelessWidget {
-  final NewsItem newsItem;
   NewsItemDesign({@required this.newsItem});
+  final NewsItem newsItem;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class NewsItemDesign extends StatelessWidget {
                   Text(newsItem.title??' ', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),textAlign: TextAlign.center,textDirection: TextDirection.rtl,),
                   const SizedBox(height: 6,),
                   Text(newsItem.description??' ', style: TextStyle(fontSize: 9.5),textAlign: TextAlign.right,textDirection: TextDirection.rtl,),
-                  Center(child: FlatButton(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),child: Text('Read more',style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),),onPressed: () =>_launchURL(newsItem.url),))
+                  Center(child: FlatButton(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),child: Text('Read more',style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),),onPressed: () =>Links.launchURL(newsItem.url),))
 
                 ],
               ),
@@ -49,12 +49,5 @@ class NewsItemDesign extends StatelessWidget {
           },
         )
     );
-  }
-}
-void _launchURL(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
   }
 }
