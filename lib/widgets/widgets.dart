@@ -13,4 +13,3 @@ export 'news_item_design.dart';
 export 'protect_yourself.dart';
 export 'shop_item_design.dart';
 export 'title.dart';
-export 'loading_widget.dart';

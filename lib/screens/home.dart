@@ -40,7 +40,7 @@ class Home extends StatelessWidget {
               COVIDInfo(),
               const ProtectYourselfButton(),
               COVANTI(),
-              SizedBox(height: 120,)
+              SizedBox(height: 120,),
             ],
           ),
     );
