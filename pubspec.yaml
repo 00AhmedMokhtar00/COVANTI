@@ -59,7 +59,6 @@ flutter:
    - assets/images/
    - assets/icons/
    - assets/images/advices/
-   - assets/countries.json
    - assets/chatbot.json
    - assets/co.json
    - lang/ar.json
