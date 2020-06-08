@@ -17,6 +17,7 @@ import '../prefs/pref_utils.dart';
 
 class PrefManager {
   static String country;
+  static String country_ar;
   static String country_code;
   static LatLng current_location;
   static int cases, deaths, recovered;
@@ -34,6 +35,7 @@ class PrefManager {
       country_code       = await getCountryCode();
       current_location   = LatLng(await getLocationLatitude(), await getLocationLongitude());
     }
+    country_ar = await getArabicCountryName();
     print('2');
     await fetchCase();
     print('3');
@@ -417,5 +419,10 @@ class PrefManager {
 
   static String tr(BuildContext context, String key) {
     return CovantiLocalization.of(context).translate(key);
+  }
+
+  static Future<String> getArabicCountryName()async{
+    Map countries = await AssetManager.loadJsonData(AssetPath.COUNTRIES_AR);
+    return countries[country_code].toString();
   }
 }

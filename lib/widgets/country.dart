@@ -8,7 +8,7 @@ class Country extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10, left: 8),
+      padding: const EdgeInsets.only(bottom: 10, left: 8, top: 8.0),
       child: Text(
         country,
         style: Theme.of(context).textTheme.body1,
