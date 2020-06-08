@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../localization/keys.dart';
+import '../prefs/pref_manager.dart';
+
 
 class CasesBuilder extends StatelessWidget {
   final int totalCases, deathCases, recoverCases, todayCases, todayDeaths;
@@ -19,8 +22,8 @@ class CasesBuilder extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 5,),
-          const Text('Confirmed cases'),
-          Text('+' + NumberFormat.decimalPattern().format(todayCases) + ' today', style: TextStyle(fontSize: 10),),
+          Text(PrefManager.tr(context, LocKeys.CONFIRMED_CASES_TXT)),
+          Text('+' + NumberFormat.decimalPattern().format(todayCases) + PrefManager.tr(context, LocKeys.TODAY), style: TextStyle(fontSize: 10),),
           const SizedBox(height: 8,),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -31,18 +34,18 @@ class CasesBuilder extends StatelessWidget {
                     Text( NumberFormat.decimalPattern().format(deathCases) ,style: Theme.of(context).textTheme.display2),
                   ],
                 ),
-                const Text('Deaths'),
-                Text('+' + NumberFormat.decimalPattern().format(todayDeaths) + ' today', style: TextStyle(color: Colors.red, fontSize: 10),),
+                Text(PrefManager.tr(context, LocKeys.DEATH_CASES_TXT)),
+                Text('+' + NumberFormat.decimalPattern().format(todayDeaths) + PrefManager.tr(context, LocKeys.TODAY), style: TextStyle(color: Colors.red, fontSize: 10),),
               ],),
               Column(children: <Widget>[
                 Text(NumberFormat.decimalPattern().format(recoverCases),style: Theme.of(context).textTheme.display1),
-                const Text('Cured'),
+                Text(PrefManager.tr(context, LocKeys.RECOVERED_CASES_TXT)),
                 Text(' ', style: TextStyle(fontSize: 10),),
               ],),
             ],
           ),
 
-          Text('last update: $covLastUpdate',style: TextStyle(color: Colors.grey,fontSize: 8),),
+          Text('${PrefManager.tr(context, LocKeys.LAST_UPDATE)}: $covLastUpdate',style: TextStyle(color: Colors.grey,fontSize: 8),),
           const SizedBox(height: 5,),
         ]
     );

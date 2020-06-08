@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:solution_challenge/localization/language.dart';
+import 'package:solution_challenge/localization/keys.dart';
 
-import '../main.dart';
 import '../prefs/pref_manager.dart';
 import '../res/assets.dart';
 import '../widgets/widgets.dart';
@@ -39,11 +38,12 @@ class _HomeState extends State<Home> {
                         Text(' corona test', textAlign: TextAlign.end, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)
                       ],
                     ),
-                  )
+                  ),
+                  LanguageButton(context: context)
                 ],
               ),
               HomeMap(),
-              Country('In ${PrefManager.country}'),
+              Country('${PrefManager.tr(context, LocKeys.IN_COUNTRY)}${PrefManager.country}'),
               Cases(),
               COVIDInfo(),
               const ProtectYourselfButton(),

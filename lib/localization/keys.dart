@@ -8,13 +8,10 @@ class LocKeys{
   static const String  CONFIRMED_CASES_TXT = "confirmed_cases_txt";
   static const String  DEATH_CASES_TXT = "death_cases_txt";
   static const String  RECOVERED_CASES_TXT = "recovered_cases_txt";
-  static const String  TODAY_CONFIRMED_CASES_TXT = "today_confirmed_cases_txt";
-  static const String  TODAY_DEATH_CASES_TXT = "today_death_cases_txt";
   static const String  CONFIRMED_GLOBAL_CASES_TXT = "confirmed_global_cases_txt";
   static const String  DEATH_GLOBAL_CASES_TXT = "death_global_cases_txt";
   static const String  RECOVERED_GLOBAL_CASES_TXT = "recovered_global_cases_txt";
-  static const String  TODAY_CONFIRMED_GLOBAL_CASES_TXT = "today_confirmed_global_cases_txt";
-  static const String  TODAY_DEATH_GLOBAL_CASES_TXT = "today_death_global_cases_txt";
+  static const String TODAY = "today";
   static const String  LAST_UPDATE= "last_update";
   static const String  HOME_COVID_INFO_BTN= "home_covid_info_btn";
   static const String  HOME_PROTECT_YOURSELF_BTN= "home_protect_yourself_btn";

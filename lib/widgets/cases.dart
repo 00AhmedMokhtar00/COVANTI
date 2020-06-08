@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:solution_challenge/localization/keys.dart';
 
 import '../prefs/pref_manager.dart';
 import 'cases_builder.dart';
@@ -14,7 +15,7 @@ class Cases extends StatelessWidget {
                 PrefManager.todayCases,
                 PrefManager.todayDeaths,
                 PrefManager.lastUpdate,
-            ):Center(child: Text('Please enable internet connection to get the statistics',textAlign: TextAlign.center,style: TextStyle(color: Colors.red),));
+            ):Center(child: Text(PrefManager.tr(context, LocKeys.ACTIVATE_INTERNET_MSG),textAlign: TextAlign.center,style: TextStyle(color: Colors.red),));
         }
 
 }

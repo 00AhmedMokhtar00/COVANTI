@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:solution_challenge/localization/keys.dart';
+import 'package:solution_challenge/prefs/pref_manager.dart';
 
 import '../res/assets.dart';
 
@@ -32,7 +34,7 @@ class COVIDInfo extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Text('What is Coronavirus?', style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
+                  Text(PrefManager.tr(context, LocKeys.HOME_COVID_INFO_BTN), style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
                   Icon(Icons.navigate_next,color: Theme.of(context).primaryColor,size: 40,),
                 ],
               );
