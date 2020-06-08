@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:solution_challenge/localization/keys.dart';
 import 'package:solution_challenge/prefs/pref_manager.dart';
 
 import '../widgets/global_map.dart';
@@ -17,11 +18,11 @@ class CMap extends StatelessWidget{
       child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              CTitle('Map'),
+              CTitle(PrefManager.tr(context, LocKeys.MAP_TITLE)),
               GlobalMap(),
-              Country('Globally'),
+              Country(PrefManager.tr(context, LocKeys.MAP_GLOBALLY_TXT)),
               GlobalCases(),
-              Country('In ${PrefManager.country}'),
+              Country('${PrefManager.tr(context, LocKeys.IN_COUNTRY)}${PrefManager.country}'),
               Cases(),
               SizedBox(height: 120,)
             ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:solution_challenge/prefs/pref_manager.dart';
 import '../models/advice.dart';
 
 class AdviceDetails extends StatefulWidget {
@@ -51,7 +52,7 @@ class _AdviceDetailsState extends State<AdviceDetails> {
 
             children: <Widget>[
               SizedBox(height: 10,),
-              Center(child: Text(args.title, style: Theme.of(context).textTheme.body1,)),
+              Center(child: Text(PrefManager.tr(context, args.title), style: Theme.of(context).textTheme.body1,)),
               SizedBox(height: 15,),
               Container(
                 margin: const EdgeInsets.only(left: 4, top: 4, bottom: 4),
@@ -77,7 +78,7 @@ class _AdviceDetailsState extends State<AdviceDetails> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Container(margin: const EdgeInsets.only(left: 5, right: 5, top: 8),child: Icon(Icons.brightness_1, color: Theme.of(context).primaryColor, size: 10,)),
-                            Expanded(child: Text(args.description[i], style: TextStyle(fontSize: 14),)),
+                            Expanded(child: Text(PrefManager.tr(context, args.description[i]), style: TextStyle(fontSize: 14),)),
                           ],
                         ),
                       );

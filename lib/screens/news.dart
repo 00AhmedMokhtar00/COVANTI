@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:solution_challenge/localization/keys.dart';
 
 import '../prefs/pref_manager.dart';
 import '../models/news_item.dart';
@@ -13,7 +14,7 @@ class News extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        CTitle('News'),
+        CTitle(PrefManager.tr(context, LocKeys.NEWS_TITLE)),
         Expanded(child: newsBuilder()),
         SizedBox(height: 30)
       ],

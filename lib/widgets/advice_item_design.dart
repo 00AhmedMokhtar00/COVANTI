@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import '../prefs/pref_manager.dart';
 import '../models/advice.dart';
 
 class AdviceItemDesign extends StatelessWidget {
@@ -31,7 +33,7 @@ class AdviceItemDesign extends StatelessWidget {
                 Expanded(
                   child: Row(
                     children: <Widget>[
-                    Expanded(child: Text(advice.title, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),)),
+                    Expanded(child: Text(PrefManager.tr(context, advice.title), style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),)),
                     Icon(Icons.navigate_next,color: Theme.of(context).primaryColor,size: 30),
                     ]
                   ),

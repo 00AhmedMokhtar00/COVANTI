@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:solution_challenge/localization/keys.dart';
+import 'package:solution_challenge/prefs/pref_manager.dart';
 
 import '../res/asset_paths.dart';
 import '../screens/chatbot.dart';
@@ -25,7 +27,7 @@ class COVANTI extends StatelessWidget {
                           spreadRadius: 1, color: Colors.grey, blurRadius: 3)
                     ]
                 ),
-                child: Center(child: Text('Hi, I am COVANTI, How can I help you?',
+                child: Center(child: Text(PrefManager.tr(context, LocKeys.HOME_COVANTI_MSG),
                   style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 9.5,fontWeight: FontWeight.bold),)),
               ),
               GestureDetector(

@@ -25,7 +25,7 @@ class _HomeState extends State<Home> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  CTitle('Home'),
+                  CTitle(PrefManager.tr(context, LocKeys.HOME_TITLE)),
                   MaterialButton(
                     onPressed: () => Links.launchURL(Links.CORONA_TEST),
                     color: Theme.of(context).primaryColor,
@@ -35,7 +35,7 @@ class _HomeState extends State<Home> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Icon(Icons.verified_user, color: Colors.white,),
-                        Text(' corona test', textAlign: TextAlign.end, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)
+                        Text(PrefManager.tr(context, LocKeys.CORONA_TEST_BUTTON), textAlign: TextAlign.end, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)
                       ],
                     ),
                   ),
