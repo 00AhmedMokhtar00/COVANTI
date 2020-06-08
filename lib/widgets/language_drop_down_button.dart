@@ -10,7 +10,8 @@ class LanguageButton extends StatelessWidget {
   LanguageButton({this.context});
   void _changeLanguage(Language language) async {
     await PrefManager.setLocale(language.languageCode);
-    MyApp.setLocale(context, PrefManager.current_locale);
+    Locale cur = PrefManager.locale(language.languageCode);
+    MyApp.setLocale(context, cur);
   }
   @override
   Widget build(BuildContext context) {

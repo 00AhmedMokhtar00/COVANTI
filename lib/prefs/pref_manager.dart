@@ -404,9 +404,9 @@ class PrefManager {
 
   static Future<Locale> getLocale() async {
     String languageCode = await PrefUtils.getString(PrefKeys.LANGUAGE_CODE) ?? PrefKeys.ENGLISH;
-    return _locale(languageCode);
+    return locale(languageCode);
   }
-  static Locale _locale(String languageCode) {
+  static Locale locale(String languageCode) {
     switch (languageCode) {
       case PrefKeys.ENGLISH:
         return Locale(PrefKeys.ENGLISH, 'US');
