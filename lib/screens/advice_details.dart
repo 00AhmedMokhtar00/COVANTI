@@ -14,12 +14,16 @@ class _AdviceDetailsState extends State<AdviceDetails> {
 
   bool isSpeaking = false;
 
-  Future _speak(String txt) async{
+  Future _speak(Advice args) async{
     if(!isSpeaking) {
       setState(() {
         isSpeaking = true;
       });
-      await flutterTts.speak(txt);
+
+      for(int i = 0 ; i < args.description.length ; i++){
+        await flutterTts.speak(PrefManager.tr(context, args.description[i]));
+      }
+
     }else{
       setState(() {
         isSpeaking = false;
@@ -41,11 +45,11 @@ class _AdviceDetailsState extends State<AdviceDetails> {
         child: IconButton(color: Theme.of(context).primaryColor, icon: Icon(Icons.arrow_back_ios),iconSize: 30,onPressed: (){Navigator.pop(context);},),
       ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: PrefManager.current_locale.languageCode == "en"?FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
         child: Icon(Icons.volume_up, color: Colors.white.withOpacity(0.9),size: 30,),
-        onPressed: ()=> _speak(args.description.toString()),
-      ),
+        onPressed: () => _speak(args),
+      ):null,
       body: LayoutBuilder(
         builder: (_, constrains){
           return Column(

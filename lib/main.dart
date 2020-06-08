@@ -22,6 +22,7 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+  PrefManager.current_locale = await PrefManager.getLocale();
   //await Permission.microphone.request().isGranted;
   //await Permission.location.request().isGranted;
   runApp(MyApp());
@@ -49,55 +50,55 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      locale: PrefManager.current_locale,
-      supportedLocales: [
-        const Locale('en'), // English
-        const Locale('ar'), // Hebrew
-      ],
-      localizationsDelegates: [
-        CovantiLocalization.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      localeResolutionCallback: (deviceLocale, supportedLocale){
-        for(var locale in supportedLocale){
-          if(locale.languageCode == deviceLocale.languageCode){
-            return deviceLocale;
+        locale: PrefManager.current_locale,
+        supportedLocales: [
+          const Locale('en'), // English
+          const Locale('ar'), // Hebrew
+        ],
+        localizationsDelegates: [
+          CovantiLocalization.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        localeResolutionCallback: (deviceLocale, supportedLocale){
+          for(var locale in supportedLocale){
+            if(locale.languageCode == deviceLocale.languageCode){
+              return deviceLocale;
+            }
           }
-        }
-        return supportedLocale.first;
-      },
-      debugShowCheckedModeBanner: false,
-      title: "COVANTI",
-      theme: ThemeData(
-        fontFamily: 'SFUIText',
-        textTheme: TextTheme(
-          headline: TextStyle(
-              color: Colors.black, fontSize: 28, fontWeight: FontWeight.bold),
-          display2: TextStyle(
-              color: Colors.red, fontSize: 28, fontWeight: FontWeight.bold),
-          display1: TextStyle(
-              color: Colors.green, fontSize: 28, fontWeight: FontWeight.bold),
-          body2: TextStyle(fontSize: 16, color: Colors.black),
-          // Default
-          body1: TextStyle(
-              fontSize: 18,
-              color: Colors.black.withOpacity(0.75),
-              fontWeight: FontWeight.bold), // bottomNavigationBar
+          return supportedLocale.first;
+        },
+        debugShowCheckedModeBanner: false,
+        title: "COVANTI",
+        theme: ThemeData(
+          fontFamily: 'SFUIText',
+          textTheme: TextTheme(
+            headline: TextStyle(
+                color: Colors.black, fontSize: 28, fontWeight: FontWeight.bold),
+            display2: TextStyle(
+                color: Colors.red, fontSize: 28, fontWeight: FontWeight.bold),
+            display1: TextStyle(
+                color: Colors.green, fontSize: 28, fontWeight: FontWeight.bold),
+            body2: TextStyle(fontSize: 16, color: Colors.black),
+            // Default
+            body1: TextStyle(
+                fontSize: 18,
+                color: Colors.black.withOpacity(0.75),
+                fontWeight: FontWeight.bold), // bottomNavigationBar
+          ),
+          primaryColor: Color(0xff153E87),
+          accentColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.white),
         ),
-        primaryColor: Color(0xff153E87),
-        accentColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.white),
-      ),
-      home: Splash(),
-      routes: {
-        Chatbot.routeName: (BuildContext _) => Chatbot(),
-        GlobalActiveMap.routeName: (BuildContext _) => GlobalActiveMap(),
-        ProtectYourself.routeName: (BuildContext _) => ProtectYourself(),
-        AdviceDetails.routeName: (BuildContext _) => AdviceDetails(),
-      },
-    );
+        home: Splash(),
+        routes: {
+          Chatbot.routeName: (BuildContext _) => Chatbot(),
+          GlobalActiveMap.routeName: (BuildContext _) => GlobalActiveMap(),
+          ProtectYourself.routeName: (BuildContext _) => ProtectYourself(),
+          AdviceDetails.routeName: (BuildContext _) => AdviceDetails(),
+        },
+      );
   }
 }
 

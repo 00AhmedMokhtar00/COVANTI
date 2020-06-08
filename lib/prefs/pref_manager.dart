@@ -28,8 +28,6 @@ class PrefManager {
 
   static Future<bool> initialPref()async{
 
-    current_locale = await getLocale();
-
     if(!await getUserLocation()){
       print('1');
       country            = await getCountry();
