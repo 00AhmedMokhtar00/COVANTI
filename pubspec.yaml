@@ -59,6 +59,7 @@ flutter:
    - assets/images/advices/
    - assets/countries.json
    - assets/chatbot.json
+   - assets/co.json
 
 
   fonts:

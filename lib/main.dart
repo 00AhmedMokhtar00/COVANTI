@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:solution_challenge/res/asset_manager.dart';
+import 'package:solution_challenge/res/assets.dart';
 
 import 'prefs/pref_manager.dart';
 import 'res/asset_paths.dart';
