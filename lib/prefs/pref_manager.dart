@@ -403,7 +403,7 @@ class PrefManager {
   }
 
   static Future<Locale> getLocale() async {
-    String languageCode = PrefUtils.getString(PrefKeys.LANGUAGE_CODE) ?? PrefKeys.ENGLISH;
+    String languageCode = await PrefUtils.getString(PrefKeys.LANGUAGE_CODE) ?? PrefKeys.ENGLISH;
     return _locale(languageCode);
   }
   static Locale _locale(String languageCode) {

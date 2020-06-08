@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
           Container(height: MQH,width: MQW,margin: const EdgeInsets.only(left: 10, right: 10),child: _screens[_currentIndex]),
           Align(
             alignment: Alignment.bottomCenter,
-            child: CButtomNavigationBar(onSelect: onTabTapped, index: _currentIndex),
+            child: CButtomNavigationBar(context: context, onSelect: onTabTapped, index: _currentIndex),
           )
         ],
       )

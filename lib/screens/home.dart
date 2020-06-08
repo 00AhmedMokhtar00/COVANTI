@@ -25,26 +25,13 @@ class _HomeState extends State<Home> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  CTitle(PrefManager.tr(context, LocKeys.HOME_TITLE)),
-                  MaterialButton(
-                    onPressed: () => Links.launchURL(Links.CORONA_TEST),
-                    color: Theme.of(context).primaryColor,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-                    elevation: 5.0,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Icon(Icons.verified_user, color: Colors.white,),
-                        Text(PrefManager.tr(context, LocKeys.CORONA_TEST_BUTTON), textAlign: TextAlign.end, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)
-                      ],
-                    ),
-                  ),
-                  LanguageButton(context: context)
+                  Expanded(child: CTitle(PrefManager.tr(context, LocKeys.HOME_TITLE))),
+                  LanguageButton(context: context),
                 ],
               ),
               HomeMap(),
               Country('${PrefManager.tr(context, LocKeys.IN_COUNTRY)}${PrefManager.country}'),
-              Cases(),
+              Cases(ctx: context),
               COVIDInfo(),
               const ProtectYourselfButton(),
               COVANTI(),
@@ -54,5 +41,19 @@ class _HomeState extends State<Home> {
     );
   }
 }
+
+//                        MaterialButton(
+//                          onPressed: () => Links.launchURL(Links.CORONA_TEST),
+//                          color: Theme.of(context).primaryColor,
+//                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+//                          elevation: 5.0,
+//                          child: Row(
+//                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                            children: <Widget>[
+//                              Icon(Icons.verified_user, color: Colors.white,),
+//                              Text(PrefManager.tr(context, LocKeys.CORONA_TEST_BUTTON), textAlign: TextAlign.end, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)
+//                            ],
+//                          ),
+//                        ),
 
 

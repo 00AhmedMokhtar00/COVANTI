@@ -14,35 +14,32 @@ class LanguageButton extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: DropdownButton<Language>(
-        underline: SizedBox(),
-        icon: Icon(
-          Icons.language,
-          color: Colors.white,
-        ),
-        onChanged: (Language language) {
-          _changeLanguage(language);
-        },
-        items: Language.languageList()
-            .map<DropdownMenuItem<Language>>(
-              (e) => DropdownMenuItem<Language>(
-            value: e,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Text(
-                  e.flag,
-                  style: TextStyle(fontSize: 30),
-                ),
-                Text(e.name)
-              ],
-            ),
-          ),
-        )
-            .toList(),
+    return DropdownButton<Language>(
+      underline: SizedBox(),
+      icon: Icon(
+        Icons.language,
+        color: Color(0xff153E87),
       ),
+      onChanged: (Language language) {
+        _changeLanguage(language);
+      },
+      items: Language.languageList()
+          .map<DropdownMenuItem<Language>>(
+            (e) => DropdownMenuItem<Language>(
+          value: e,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Text(
+                e.flag,
+                style: TextStyle(fontSize: 30),
+              ),
+              Text(e.name)
+            ],
+          ),
+        ),
+      )
+          .toList(),
     );
   }
 }

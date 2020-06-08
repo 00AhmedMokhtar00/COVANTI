@@ -112,7 +112,8 @@ class _GlobalActiveMapState extends State<GlobalActiveMap> {
                       int.parse(country.recovered),
                       int.parse(country.todayCases),
                       int.parse(country.todayDeaths),
-                      PrefManager.lastUpdate
+                      PrefManager.lastUpdate,
+                      ctx: context
                   )
               );
             });

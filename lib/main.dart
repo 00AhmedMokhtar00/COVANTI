@@ -69,7 +69,7 @@ class _MyAppState extends State<MyApp> {
         return supportedLocale.first;
       },
       debugShowCheckedModeBanner: false,
-      title: PrefManager.tr(context, LocKeys.APP_TITLE),
+      title: "COVANTI",
       theme: ThemeData(
         fontFamily: 'SFUIText',
         textTheme: TextTheme(

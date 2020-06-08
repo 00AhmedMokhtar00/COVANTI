@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import '../localization/keys.dart';
+import '../prefs/pref_manager.dart';
 
 
 class CButtomNavigationBar extends StatelessWidget {
-  CButtomNavigationBar({this.onSelect, this.index});
+  CButtomNavigationBar({this.onSelect, this.index, this.context});
   final Function onSelect;
   final int index;
+  final BuildContext context;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext ctx) {
     return Container(
 
       margin: const EdgeInsets.only(bottom: 30,left: 20, right: 20, top: 30),
@@ -31,21 +34,21 @@ class CButtomNavigationBar extends StatelessWidget {
           unselectedFontSize: 12,
           unselectedItemColor: Colors.grey,
           items: [
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: Icon(MdiIcons.homeOutline, ),
-              title: Text('Home',),
+              title: Text(PrefManager.tr(context, LocKeys.HOME_TITLE)),
             ),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: Icon(MdiIcons.compassOutline,),
-              title: Text('Maps'),
+              title: Text(PrefManager.tr(context, LocKeys.MAP_TITLE)),
             ),
 //            const BottomNavigationBarItem(
 //              icon: Icon(MdiIcons.cartOutline,),
 //              title: Text('Shops'),
 //            ),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
                 icon: Icon(MdiIcons.textBoxMultipleOutline,),
-                title: Text('News')
+                title: Text(PrefManager.tr(context, LocKeys.NEWS_TITLE))
             )
           ],
         ),

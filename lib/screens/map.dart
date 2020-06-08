@@ -21,9 +21,9 @@ class CMap extends StatelessWidget{
               CTitle(PrefManager.tr(context, LocKeys.MAP_TITLE)),
               GlobalMap(),
               Country(PrefManager.tr(context, LocKeys.MAP_GLOBALLY_TXT)),
-              GlobalCases(),
+              GlobalCases(ctx: context),
               Country('${PrefManager.tr(context, LocKeys.IN_COUNTRY)}${PrefManager.country}'),
-              Cases(),
+              Cases(ctx: context),
               SizedBox(height: 120,)
             ],
           ),
