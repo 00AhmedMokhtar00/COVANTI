@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:solution_challenge/prefs/pref_keys.dart';
+import '../prefs/pref_keys.dart';
 
 class CovantiLocalization{
   final Locale locale;

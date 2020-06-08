@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:solution_challenge/localization/keys.dart';
-import 'package:solution_challenge/prefs/pref_keys.dart';
+import '../localization/keys.dart';
+import '../prefs/pref_keys.dart';
 
 import '../prefs/pref_manager.dart';
 import '../res/assets.dart';
@@ -38,7 +38,7 @@ class _HomeState extends State<Home> {
               const ProtectYourselfButton(),
               Center(
                 child: Container(
-                  width: 150.0,
+                  width: 155.0,
                   child: MaterialButton(
                     onPressed: () => Links.launchURL(Links.CORONA_TEST),
                     color: Theme.of(context).primaryColor,

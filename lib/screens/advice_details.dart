@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:solution_challenge/prefs/pref_manager.dart';
+import '../prefs/pref_manager.dart';
 import '../models/advice.dart';
 
 class AdviceDetails extends StatefulWidget {

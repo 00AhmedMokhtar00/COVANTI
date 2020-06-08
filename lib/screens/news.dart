@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solution_challenge/localization/keys.dart';
+import '../localization/keys.dart';
 
 import '../prefs/pref_manager.dart';
 import '../models/news_item.dart';

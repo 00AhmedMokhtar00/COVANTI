@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:solution_challenge/localization/keys.dart';
-import 'package:solution_challenge/prefs/pref_keys.dart';
-import 'package:solution_challenge/prefs/pref_manager.dart';
+
+import '../localization/keys.dart';
+import '../prefs/pref_keys.dart';
+import '../prefs/pref_manager.dart';
 
 import '../widgets/global_map.dart';
 import '../widgets/cases.dart';
