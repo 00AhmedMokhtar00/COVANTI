@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
 
   cupertino_icons: ^0.1.2
@@ -60,6 +62,8 @@ flutter:
    - assets/countries.json
    - assets/chatbot.json
    - assets/co.json
+   - lang/ar.json
+   - lang/en.json
 
 
   fonts:

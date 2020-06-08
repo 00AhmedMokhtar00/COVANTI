@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/services.dart';
@@ -7,7 +9,8 @@ import 'package:geocoder/geocoder.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
-import 'package:solution_challenge/res/assets.dart';
+import '../localization/covanti_localization.dart';
+import '../res/assets.dart';
 
 import '../prefs/pref_keys.dart';
 import '../prefs/pref_utils.dart';
@@ -21,8 +24,11 @@ class PrefManager {
   static int globalCases, globalDeaths, globalRecovered;
   static int todayGlobalCases, todayGlobalDeaths;
   static String lastUpdate;
+  static Locale current_locale;
 
   static Future<bool> initialPref()async{
+
+    current_locale = await getLocale();
 
     if(!await getUserLocation()){
       print('1');
@@ -390,5 +396,28 @@ class PrefManager {
         });
       }
       return hasData > 10?temp:null;
+  }
+
+  static Future<void> setLocale(String languageCode) async {
+    await PrefUtils.setString(PrefKeys.LANGUAGE_CODE, languageCode);
+  }
+
+  static Future<Locale> getLocale() async {
+    String languageCode = PrefUtils.getString(PrefKeys.LANGUAGE_CODE) ?? PrefKeys.ENGLISH;
+    return _locale(languageCode);
+  }
+  static Locale _locale(String languageCode) {
+    switch (languageCode) {
+      case PrefKeys.ENGLISH:
+        return Locale(PrefKeys.ENGLISH, 'US');
+      case PrefKeys.ARABIC:
+        return Locale(PrefKeys.ARABIC, "SA");
+      default:
+        return Locale(PrefKeys.ENGLISH, 'US');
+    }
+  }
+
+  static String tr(BuildContext context, String key) {
+    return CovantiLocalization.of(context).translate(key);
   }
 }
