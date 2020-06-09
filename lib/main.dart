@@ -114,6 +114,7 @@ class _SplashState extends State<Splash> {
       isLoading = true;
     });
     await PrefManager.initialPref();
+    PrefManager.initialGlobal();
     setState(() {
       isLoading = false;
     });

@@ -8,6 +8,7 @@ import '../widgets/title.dart';
 
 class News extends StatelessWidget {
   static const String routeName = "News";
+  static bool isConnected;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,10 @@ class News extends StatelessWidget {
                 itemCount: 20,
               );
             }
-            return Center(child: Text('Please enable internet to get the latest news', style: TextStyle(color: Colors.red, fontSize: 15, height: 1.4),));
+            if(isConnected){
+              return Center(child: CircularProgressIndicator());
+            }
+            return Center(child: Text(PrefManager.tr(context, LocKeys.ACTIVATE_INTERNET_MSG), textAlign: TextAlign.center, style: TextStyle(color: Colors.red, fontSize: 15, height: 1.4),));
           }),
     );
   }

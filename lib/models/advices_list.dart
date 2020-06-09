@@ -41,7 +41,7 @@ const List<Advice> adviceList = [
       title: LocKeys.ADVICE_6_TITLE,
       description: [
         LocKeys.ADVICE_6_DESCRIPTION_1,
-        LocKeys.ADVICE_6_DESCRIPTION_1
+        LocKeys.ADVICE_6_DESCRIPTION_2
       ],
       img: 'assets/images/advices/cleanimg-1.png'),
 ];

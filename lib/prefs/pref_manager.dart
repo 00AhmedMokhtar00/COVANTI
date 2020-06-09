@@ -9,6 +9,7 @@ import 'package:geocoder/geocoder.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
+import 'package:solution_challenge/screens/news.dart';
 import '../localization/covanti_localization.dart';
 import '../res/assets.dart';
 
@@ -30,31 +31,28 @@ class PrefManager {
   static Future<bool> initialPref()async{
 
     if(!await getUserLocation()){
-      print('1');
       country            = await getCountry();
       country_code       = await getCountryCode();
       current_location   = LatLng(await getLocationLatitude(), await getLocationLongitude());
     }
     country_ar = await getArabicCountryName();
-    print('2');
     await fetchCase();
-    print('3');
     await fetchGlobalCase();
-    print('4');
     cases              = await getCases();
     deaths             = await getDeaths();
     recovered          = await getRecovered();
     todayCases         = await getTodayCases();
     todayDeaths        = await getTodayDeaths();
     lastUpdate         = await getLastUpdate();
+    await fetchNews();
+  }
+
+  static Future<void> initialGlobal()async{
     globalCases        = await getGlobalCases();
     globalDeaths       = await getGlobalDeaths();
     globalRecovered    = await getGlobalRecovered();
     todayGlobalCases   = await getTodayGlobalCases();
     todayGlobalDeaths  = await getTodayGlobalDeaths();
-    print('5');
-    await fetchNews();
-    print('6');
   }
 
   static Future<void> setCountry(String val) async {
@@ -112,13 +110,13 @@ class PrefManager {
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;
     Location location = Location();
-    _serviceEnabled = await location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
-      if (!_serviceEnabled) {
-        return false;
-      }
-    }
+//    _serviceEnabled = await location.serviceEnabled();
+//    if (!_serviceEnabled) {
+//      _serviceEnabled = await location.requestService();
+//      if (!_serviceEnabled) {
+//        return false;
+//      }
+//    }
 
     _permissionGranted = await location.hasPermission();
     if (_permissionGranted == PermissionStatus.denied) {
@@ -167,7 +165,7 @@ class PrefManager {
     setCountryCode(first.countryCode);
     country = first.countryName;
     country_code = first.countryCode;
-    print('${first.countryCode}%20${first.countryName},');
+    //print('${first.countryCode}%20${first.countryName},');
     return true;
   }
 
@@ -175,8 +173,10 @@ class PrefManager {
   static Future<bool> checkInternetConnectivity() async {
     var result = await Connectivity().checkConnectivity();
     if (result == ConnectivityResult.none) {
+      News.isConnected = false;
       return false;
     } else if (result == ConnectivityResult.mobile || result == ConnectivityResult.wifi) {
+      News.isConnected = true;
       return true;
     }
   }
