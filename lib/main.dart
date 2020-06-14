@@ -25,6 +25,7 @@ void main() async {
   PrefManager.current_locale = await PrefManager.getLocale();
   //await Permission.microphone.request().isGranted;
   //await Permission.location.request().isGranted;
+
   runApp(MyApp());
 }
 

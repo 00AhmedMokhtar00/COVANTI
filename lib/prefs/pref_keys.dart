@@ -3,6 +3,7 @@ class PrefKeys {
   static const String ENGLISH = 'en';
   static const String ARABIC = 'ar';
   static const String LANGUAGE_CODE = 'languageCode';
+  static const String LOCATION_LOADED = "location_loaded";
   static const String COUNTRY = "country";
   static const String COUNTRY_CODE = "country_code";
   static const String LOCATION_LATITUDE = "location_latitude";

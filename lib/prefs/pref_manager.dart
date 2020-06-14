@@ -30,10 +30,13 @@ class PrefManager {
 
   static Future<bool> initialPref()async{
 
-    if(!await getUserLocation()){
-      country            = await getCountry();
-      country_code       = await getCountryCode();
-      current_location   = LatLng(await getLocationLatitude(), await getLocationLongitude());
+    if(!await getLocationLoaded()) {
+      if (!await getUserLocation()) {
+        country = await getCountry();
+        country_code = await getCountryCode();
+        current_location =
+            LatLng(await getLocationLatitude(), await getLocationLongitude());
+      }
     }
     country_ar = await getArabicCountryName();
     await fetchCase();
@@ -165,7 +168,7 @@ class PrefManager {
     setCountryCode(first.countryCode);
     country = first.countryName;
     country_code = first.countryCode;
-    //print('${first.countryCode}%20${first.countryName},');
+    await setLocationLoaded(true);
     return true;
   }
 
@@ -204,6 +207,13 @@ class PrefManager {
       print('ERROR!!');
       return false;
     }
+  }
+
+  static Future<void> setLocationLoaded(bool val) async {
+    await PrefUtils.setBool(PrefKeys.LOCATION_LOADED, val);
+  }
+  static Future<bool> getLocationLoaded() async {
+    return await PrefUtils.getBool(PrefKeys.LOCATION_LOADED);
   }
 
   static Future<void> setCases(int val) async {
