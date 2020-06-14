@@ -9,7 +9,7 @@ import 'package:geocoder/geocoder.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:location/location.dart';
-import 'package:solution_challenge/screens/news.dart';
+import '../screens/news.dart';
 import '../localization/covanti_localization.dart';
 import '../res/assets.dart';
 
@@ -17,6 +17,7 @@ import '../prefs/pref_keys.dart';
 import '../prefs/pref_utils.dart';
 
 class PrefManager {
+  static bool isConnected = false;
   static String country;
   static String country_ar;
   static String country_code;
@@ -27,20 +28,27 @@ class PrefManager {
   static int todayGlobalCases, todayGlobalDeaths;
   static String lastUpdate;
   static Locale current_locale;
+  static Map<String, String> offlineNews;
 
   static Future<bool> initialPref()async{
 
-    if(!await getLocationLoaded()) {
+    bool isLocationLoaded = await getLocationLoaded();
+    if(!isLocationLoaded) {
       if (!await getUserLocation()) {
         country = await getCountry();
         country_code = await getCountryCode();
         current_location =
             LatLng(await getLocationLatitude(), await getLocationLongitude());
       }
+    }else{
+      country = await getCountry();
+      country_code = await getCountryCode();
+      current_location =
+          LatLng(await getLocationLatitude(), await getLocationLongitude());
     }
+
     country_ar = await getArabicCountryName();
     await fetchCase();
-    await fetchGlobalCase();
     cases              = await getCases();
     deaths             = await getDeaths();
     recovered          = await getRecovered();
@@ -48,9 +56,11 @@ class PrefManager {
     todayDeaths        = await getTodayDeaths();
     lastUpdate         = await getLastUpdate();
     await fetchNews();
+    offlineNews = await getOfflineNews();
   }
 
   static Future<void> initialGlobal()async{
+    await fetchGlobalCase();
     globalCases        = await getGlobalCases();
     globalDeaths       = await getGlobalDeaths();
     globalRecovered    = await getGlobalRecovered();
@@ -113,23 +123,27 @@ class PrefManager {
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;
     Location location = Location();
-//    _serviceEnabled = await location.serviceEnabled();
-//    if (!_serviceEnabled) {
-//      _serviceEnabled = await location.requestService();
-//      if (!_serviceEnabled) {
-//        return false;
-//      }
-//    }
+
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return false;
+      }
+    }
 
     _permissionGranted = await location.hasPermission();
     if (_permissionGranted == PermissionStatus.denied) {
       _permissionGranted = await location.requestPermission();
       if (_permissionGranted != PermissionStatus.granted) {
+
         return false;
       }
     }
     try {
+
       if(await checkInternetConnectivity()) {
+
         myLocation = await location.getLocation();
         current_location = LatLng(myLocation.latitude, myLocation.longitude);
         setLocationLatitude(myLocation.latitude);
@@ -176,10 +190,8 @@ class PrefManager {
   static Future<bool> checkInternetConnectivity() async {
     var result = await Connectivity().checkConnectivity();
     if (result == ConnectivityResult.none) {
-      News.isConnected = false;
       return false;
     } else if (result == ConnectivityResult.mobile || result == ConnectivityResult.wifi) {
-      News.isConnected = true;
       return true;
     }
   }
@@ -375,11 +387,12 @@ class PrefManager {
 
     if (response.statusCode == 200){
       for (int idx = 0; idx <= 19; idx++) {
-        await PrefUtils.setString('newsTitle$idx', body['articles'][idx]['title']);
-        await PrefUtils.setString('newsDescription$idx', body['articles'][idx]['description']);
-        await PrefUtils.setString('newsUrl$idx', body['articles'][idx]['url']);
-        await PrefUtils.setString('newsImg$idx', body['articles'][idx]['urlToImage']);
+        await PrefUtils.setString('newsTitle$idx', body['articles'][idx]['title']??" ");
+        await PrefUtils.setString('newsDescription$idx', body['articles'][idx]['description']??" ");
+        await PrefUtils.setString('newsUrl$idx', body['articles'][idx]['url']??" ");
+        await PrefUtils.setString('newsImg$idx', body['articles'][idx]['urlToImage']??" ");
       }
+      isConnected = true;
       return true;
     }
     return false;
