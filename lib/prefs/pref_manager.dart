@@ -202,7 +202,7 @@ class PrefManager {
       response = await http.get(
           '${Links.CORONA_CASES}/${PrefManager.country}');
     }catch(e){
-      print("MOKHOTAAAR" + e.toString());
+    
       return false;
     }
     if (response.statusCode == 200) {
@@ -299,7 +299,7 @@ class PrefManager {
     try {
       response = await http.get(Links.CORONA_GLOBAL_CASES);
     }catch(e){
-      print("MOKHOOOO" + e.toString());
+  
       return false;
     }
     var body = json.decode(response.body);
@@ -378,7 +378,7 @@ class PrefManager {
     try {
       response = await http.get(
           'http://newsapi.org/v2/top-headlines?country=${PrefManager
-              .country_code}&category=health&apiKey=323019aaa9fd463e83cce512b425a1ab');
+              .country_code}&category=health&apiKey=PUT YOUR OWN GOOGLE NEWS API KEY');
     }catch(e){
       print("NEWS" + e.toString());
       return false;
