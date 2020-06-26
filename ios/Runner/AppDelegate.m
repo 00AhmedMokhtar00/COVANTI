@@ -6,7 +6,7 @@
 
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  [GMSServices provideAPIKey:@"AIzaSyDf41MF3yXO0Ey6oJwfS20bTFH7R3Gb6ng"];
+  [GMSServices provideAPIKey:@"PUT YOUR OWN API KEY"];
   [GeneratedPluginRegistrant registerWithRegistry:self];
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
